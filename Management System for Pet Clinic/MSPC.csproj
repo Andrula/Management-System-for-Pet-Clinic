@@ -46,6 +46,7 @@
     <Compile Include="Data\Model\Appointment.cs" />
     <Compile Include="Data\Model\Customer.cs" />
     <Compile Include="Data\Model\MedicalHistory.cs" />
+    <Compile Include="Data\Model\Person.cs" />
     <Compile Include="Data\Model\Pet.cs" />
     <Compile Include="Data\Model\Staff.cs" />
     <Compile Include="Enum\StaffPosition.cs" />
@@ -54,6 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interface\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Website Links\Links.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,64 +1,35 @@
-﻿using System;
+﻿using M.Data.Model;
+using MSPC.Data.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MSPC.Model
 {
-    public class Customer
+    public class Customer : Person
     {
         // Fields
-        private string _name;
-        private string _email;
-        private string _phone;
-        private string _address;
+        private int _customerID;
 
-        // Properties (accessor methods)
-        public int ID { get; set; }
-        public string Name
+        // Properties
+        public int ID
         {
-            get { return _name; }
+            get { return _customerID; }
             set
             {
-                if (!string.IsNullOrEmpty(value))
+                if (_customerID > 0)
                 {
-                    _name = value;
+                    _customerID = value;
                 }
             }
         }
-        public string Address
+
+        public override void DisplayInfo()
         {
-            get { return _address; }
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    _address = value;
-                }
-            }
-        }
-        public string Email
-        {
-            get { return _email; }
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    _email = value;
-                }
-            }
-        }
-        public string Phone
-        {
-            get { return _phone; }
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    _phone = value;
-                }
-            }
+            Console.WriteLine($"Customer: {Name}, Email: {Email}, Phone: {Phone}, Customer ID: {ID}");
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿using Management_System_for_Pet_Clinic.Enum;
+﻿using MSPC.Enum;
 using System;
+using MSPC.Data.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,15 +8,26 @@ using System.Threading.Tasks;
 
 namespace MSPC.Model
 {
-    public class Staff
+    public class Staff : Person
     {
         // Fields
         private DateTime _dateOfBirth;
+        private int _staffID;
 
         // Properties
-        public int ID { get; set; }
-        public string Name { get; set; }
+
         public StaffPosition Position { get; set; }
+
+        public int ID
+        {
+            get { return _staffID; }
+            set {
+                if (_staffID > 0)
+                {
+                    _staffID = value;
+                }
+            }
+        }
 
         public DateTime DateOfBirth
         {
@@ -27,6 +39,11 @@ namespace MSPC.Model
                     throw new Exception("Date is out of range!");
                 }
             }
+        }
+
+        public override void DisplayInfo()
+        {
+            Console.WriteLine($"Staff: {Name} Position: {Position} Email: {Email} Phone: {Phone} Staff ID: {ID}");
         }
     }
 }

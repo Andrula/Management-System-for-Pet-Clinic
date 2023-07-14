@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Management_System_for_Pet_Clinic.Enum
+namespace MSPC.Enum
 {
     public enum StaffPosition
     {
