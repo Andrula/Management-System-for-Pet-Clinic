@@ -10,10 +10,32 @@ namespace MSPC.Model
     {
         // Fields
         private static int _nextAppointmentID = 1;
+        private int _appointmentID;
+        private DateTime _dateTime;
 
         // Properties
-        public int ID { get; set; }
-        public DateTime DateAndTime { get; set; }
+        public int ID
+        {
+            get { return _appointmentID; }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new Exception("An error has occured!");
+                }
+                _appointmentID = value;
+            }
+        }
+      
+        public DateTime DateAndTime {
+           get { return _dateTime; }
+           set { if (value < DateTime.Now)
+                {
+                    throw new Exception("Date is incorrect!");
+                }
+                _dateTime = value;
+            } 
+        }
         public int DurationInMinutes { get; set; }
         public Pet Patient { get; set; }
         public Staff ResponsibleStaff { get; set; }
