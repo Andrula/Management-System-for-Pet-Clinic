@@ -1,5 +1,4 @@
-﻿using M.Data.Model;
-using MSPC.Data.Model;
+﻿using MSPC.Data.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,14 @@ namespace MSPC.Model
     public class Customer : Person
     {
         // Fields
+        private static int _nextCustomerID = 1;
         private int _customerID;
+
+        public Customer()
+        {
+            ID = _nextCustomerID++;
+        }
+
 
         // Properties
         public int ID
@@ -20,10 +26,11 @@ namespace MSPC.Model
             get { return _customerID; }
             set
             {
-                if (_customerID > 0)
+                if (value < 0)
                 {
-                    _customerID = value;
+                    throw new Exception("An error occurred with the ID.");
                 }
+                _customerID = value;
             }
         }
 

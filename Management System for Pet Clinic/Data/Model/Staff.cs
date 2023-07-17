@@ -22,10 +22,11 @@ namespace MSPC.Model
         {
             get { return _staffID; }
             set {
-                if (_staffID > 0)
+                if (value < 0)
                 {
-                    _staffID = value;
+                    throw new Exception("An error has occured!");
                 }
+                _staffID = value;
             }
         }
 
@@ -34,16 +35,17 @@ namespace MSPC.Model
             get { return _dateOfBirth; }
             set
             {
-                if (_dateOfBirth.Year < 1900)
+                if (value.Year <= 1900)
                 {
                     throw new Exception("Date is out of range!");
                 }
+                _dateOfBirth = value;
             }
         }
 
         public override void DisplayInfo()
         {
-            Console.WriteLine($"Staff: {Name} Position: {Position} Email: {Email} Phone: {Phone} Staff ID: {ID}");
+            Console.WriteLine($"Staff ID: {ID} Staff: {Name} Position: {Position} Date of birth: {DateOfBirth.ToShortDateString()} Email: {Email} Phone: {Phone}");
         }
     }
 }
