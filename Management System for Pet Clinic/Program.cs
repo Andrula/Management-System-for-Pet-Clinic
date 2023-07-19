@@ -1,4 +1,5 @@
 ﻿using MSPC.Data.Model;
+using MSPC.Enums;
 using MSPC.Model;
 using System;
 using System.Collections;
@@ -11,25 +12,60 @@ namespace MSPC //Management System for Pet Clinic
 {
     internal class Program
     {
+        private static List<Staff> staffList = new List<Staff>();
         static void Main(string[] args)
         {
             bool isRunning = true;
 
             while (isRunning)
             {
-                DisplayLogin();
+                DisplayMenu();
                 char selection = Console.ReadKey().KeyChar;
                 Console.WriteLine();
 
                 switch (selection)
                 {
                     case '1':
-                        // Handle option 1
-                        Console.WriteLine("Option 1 selected");
+                        Console.Clear();
+                        Console.WriteLine("Creating a new staff member:");
+                        Console.Write("Enter staff name: ");
+                        string name = Console.ReadLine();
+
+                        Console.WriteLine("CEO,\r\nSurgeon,\r\nNurse,\r\nReceptionist,\r\nAssistant");
+                        Console.Write("Enter staff position from the given list: ");
+                        string position = Console.ReadLine();
+
+                        Console.Write("Enter staff date of birth (YYYY-MM-DD): ");
+                        string dateOfBirthString = Console.ReadLine();
+                        DateTime dateOfBirth = DateTime.Parse(dateOfBirthString);
+
+                        Console.Write("Enter staff email: ");
+                        string email = Console.ReadLine();
+
+                        Console.Write("Enter staff phone: ");
+                        string phone = Console.ReadLine();
+
+                        Staff newStaff = new Staff
+                        {
+                            Name = name,
+                            Position = (StaffPosition)Enum.Parse(typeof(StaffPosition), position),
+                            DateOfBirth = dateOfBirth,
+                            Email = email,
+                            Phone = phone
+                        };
+
+                        staffList.Add(newStaff);
+
+                        Console.WriteLine("New staff member created successfully.");
+                        Console.ReadKey();
                         break;
                     case '2':
-                        // Handle option 2
-                        Console.WriteLine("Option 2 selected");
+                        Console.WriteLine("Staff list.");
+                        foreach (var staff in staffList)
+                        {
+                            staff.DisplayInfo();
+                        }
+                        Console.ReadKey();
                         break;
                     case '3':
                         // Handle option 3
@@ -58,19 +94,13 @@ namespace MSPC //Management System for Pet Clinic
         {
             Console.Clear();
             Console.WriteLine("----- Menu -----");
-            Console.WriteLine("1. Option 1");
-            Console.WriteLine("2. Option 2");
+            Console.WriteLine("1. Create a new staff");
+            Console.WriteLine("2. Show list of staff");
             Console.WriteLine("3. Option 3");
             Console.WriteLine("4. Option 4");
             Console.WriteLine("Q. Quit");
             Console.WriteLine("----------------");
             Console.Write("Select an option: ");
-        }
-
-        static void DisplayLogin()
-        {
-            Console.Clear();
-            Console.WriteLine("----- Login -----");
         }
     }
 }

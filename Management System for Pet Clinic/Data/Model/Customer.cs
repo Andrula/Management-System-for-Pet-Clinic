@@ -11,27 +11,15 @@ namespace MSPC.Model
     public class Customer : Person
     {
         // Fields
-        private static int _nextCustomerID = 1;
-        private int _customerID;
+        private static int _customerID = 1;
+
+        // Properties
+        public int ID { get; }
 
         public Customer()
         {
-            ID = _nextCustomerID++;
-        }
-
-
-        // Properties
-        public int ID
-        {
-            get { return _customerID; }
-            set
-            {
-                if (value < 0)
-                {
-                    throw new Exception("An error occurred with the ID.");
-                }
-                _customerID = value;
-            }
+            ID = _customerID;
+            _customerID++;
         }
 
         public override void DisplayInfo()

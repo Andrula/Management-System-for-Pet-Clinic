@@ -49,7 +49,7 @@
     <Compile Include="Data\Model\Person.cs" />
     <Compile Include="Data\Model\Pet.cs" />
     <Compile Include="Data\Model\Staff.cs" />
-    <Compile Include="Enum\StaffPosition.cs" />
+    <Compile Include="Enums\StaffPosition.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

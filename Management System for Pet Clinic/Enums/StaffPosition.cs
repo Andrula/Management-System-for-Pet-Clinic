@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MSPC.Enum
+namespace MSPC.Enums
 {
     public enum StaffPosition
     {

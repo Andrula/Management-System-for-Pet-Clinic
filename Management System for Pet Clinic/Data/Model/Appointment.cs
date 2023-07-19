@@ -9,23 +9,12 @@ namespace MSPC.Model
     public class Appointment
     {
         // Fields
-        private static int _nextAppointmentID = 1;
-        private int _appointmentID;
+        private static int _appointmentID = 1;
         private DateTime _dateTime;
 
         // Properties
-        public int ID
-        {
-            get { return _appointmentID; }
-            set
-            {
-                if (value < 0)
-                {
-                    throw new Exception("An error has occured!");
-                }
-                _appointmentID = value;
-            }
-        }
+        public int ID { get ; }
+
       
         public DateTime DateAndTime {
            get { return _dateTime; }
@@ -46,7 +35,7 @@ namespace MSPC.Model
         // Constructor
         public Appointment()
         {
-            ID = _nextAppointmentID++;
+            ID = _appointmentID++;
         }
 
         // Methods

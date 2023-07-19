@@ -1,4 +1,4 @@
-﻿using MSPC.Enum;
+﻿using MSPC.Enums;
 using System;
 using MSPC.Data.Model;
 using System.Collections.Generic;
@@ -12,23 +12,13 @@ namespace MSPC.Model
     {
         // Fields
         private DateTime _dateOfBirth;
-        private int _staffID;
+        private static int _staffID = 1;
 
         // Properties
 
         public StaffPosition Position { get; set; }
 
-        public int ID
-        {
-            get { return _staffID; }
-            set {
-                if (value < 0)
-                {
-                    throw new Exception("An error has occured!");
-                }
-                _staffID = value;
-            }
-        }
+        public int ID { get; }
 
         public DateTime DateOfBirth
         {
@@ -41,6 +31,14 @@ namespace MSPC.Model
                 }
                 _dateOfBirth = value;
             }
+        }
+
+        // Constructor
+        public Staff()
+        {
+            // Assign the current _staffID to ID and then increment it.
+            ID = _staffID; 
+            _staffID++; 
         }
 
         public override void DisplayInfo()
