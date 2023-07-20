@@ -10,6 +10,9 @@ namespace MSPC.Model
 {
     public class Staff : Person
     {
+        // Static list
+        private static List<Staff> staffList = new List<Staff>();
+
         // Fields
         private DateTime _dateOfBirth;
         private static int _staffID = 1;
@@ -38,12 +41,22 @@ namespace MSPC.Model
         {
             // Assign the current _staffID to ID and then increment it.
             ID = _staffID; 
-            _staffID++; 
+            _staffID++;
+            staffList.Add(this);
+        }
+
+        // Methods
+        public static List<Staff> GetStaffList()
+        {
+            return staffList;
         }
 
         public override void DisplayInfo()
         {
             Console.WriteLine($"Staff ID: {ID} Staff: {Name} Position: {Position} Date of birth: {DateOfBirth.ToShortDateString()} Email: {Email} Phone: {Phone}");
         }
+
+
+
     }
 }

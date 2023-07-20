@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 
 namespace MSPC //Management System for Pet Clinic
 {
-    internal class Program
+    public class Program
     {
-        private static List<Staff> staffList = new List<Staff>();
+        // Shared static list.
+        public static List<Staff> sharedList = Staff.GetStaffList();
+
         static void Main(string[] args)
         {
             bool isRunning = true;
@@ -20,6 +22,47 @@ namespace MSPC //Management System for Pet Clinic
             while (isRunning)
             {
                 DisplayMenu();
+                char selection = Console.ReadKey().KeyChar;
+                Console.WriteLine();
+
+                switch (selection)
+                {
+                    case '1':
+                      StaffMenuSwitch(sharedList);
+                        break;
+                    case '2':
+                       
+                        break;
+                    case '3':
+                        // Handle option 3
+                        Console.WriteLine("Option 3 selected");
+                        break;
+                    case '4':
+                        // Handle option 4
+                        Console.WriteLine("Option 4 selected");
+                        break;
+                    case 'q':
+                    case 'Q':
+                        // Quit the program
+                        Console.WriteLine("Exiting the program...");
+                        isRunning = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid selection. Please try again.");
+                        break;
+                }
+
+                Console.WriteLine();
+            }
+        }
+
+        static void StaffMenuSwitch(List<Staff> staffList)
+        {
+            bool isRunning = true;
+
+            while (isRunning)
+            {
+                DisplayStaffMenu();
                 char selection = Console.ReadKey().KeyChar;
                 Console.WriteLine();
 
@@ -52,9 +95,7 @@ namespace MSPC //Management System for Pet Clinic
                             DateOfBirth = dateOfBirth,
                             Email = email,
                             Phone = phone
-                        };
-
-                        staffList.Add(newStaff);
+                        };       
 
                         Console.WriteLine("New staff member created successfully.");
                         Console.ReadKey();
@@ -66,14 +107,6 @@ namespace MSPC //Management System for Pet Clinic
                             staff.DisplayInfo();
                         }
                         Console.ReadKey();
-                        break;
-                    case '3':
-                        // Handle option 3
-                        Console.WriteLine("Option 3 selected");
-                        break;
-                    case '4':
-                        // Handle option 4
-                        Console.WriteLine("Option 4 selected");
                         break;
                     case 'q':
                     case 'Q':
@@ -94,11 +127,21 @@ namespace MSPC //Management System for Pet Clinic
         {
             Console.Clear();
             Console.WriteLine("----- Menu -----");
-            Console.WriteLine("1. Create a new staff");
-            Console.WriteLine("2. Show list of staff");
+            Console.WriteLine("1. Staff Menu");
             Console.WriteLine("3. Option 3");
             Console.WriteLine("4. Option 4");
             Console.WriteLine("Q. Quit");
+            Console.WriteLine("----------------");
+            Console.Write("Select an option: ");
+        }
+
+        static void DisplayStaffMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("----- Menu -----");
+            Console.WriteLine("1. Create a new staff");
+            Console.WriteLine("2. Show list of staff");
+            Console.WriteLine("Q. Back");
             Console.WriteLine("----------------");
             Console.Write("Select an option: ");
         }
