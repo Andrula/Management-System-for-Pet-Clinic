@@ -42,6 +42,8 @@ namespace MSPC.Model
             // Assign the current _staffID to ID and then increment it.
             ID = _staffID; 
             _staffID++;
+
+            // Add each instance to the static list
             staffList.Add(this);
         }
 
