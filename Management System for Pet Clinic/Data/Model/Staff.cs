@@ -60,6 +60,11 @@ namespace MSPC.Model
             return staffList;
         }
 
+        public static Staff FindStaffByName(List<Staff> staffList, string name)
+        {
+            return staffList.Find(s => s.Name == name);
+        }
+
         public override void DisplayInfo()
         {
             Console.WriteLine($"Staff ID: {ID} Staff: {Name} Position: {Position} Date of birth: {DateOfBirth.ToShortDateString()} Email: {Email} Phone: {Phone}");

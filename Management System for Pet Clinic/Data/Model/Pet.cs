@@ -8,6 +8,9 @@ namespace MSPC.Model
 {
     public class Pet
     {
+        // Static list
+        private static List<Pet> petList = new List<Pet>();
+
         // Properties
         public int ID { get; set; }
         public string Name { get; set; }
@@ -31,5 +34,16 @@ namespace MSPC.Model
             this.History = new List<MedicalHistory>();
             this.Appointments = new List<Appointment>();
         }
+
+        public static List<Pet> GetAllPets()
+        {
+            return petList;
+        }
+
+        public static Pet FindPetByName(List<Pet> pets ,string name)
+        {
+            return pets.Find(x => x.Name == name);
+        }
+        
     }
 }
