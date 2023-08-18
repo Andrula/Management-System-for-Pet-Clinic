@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Management_System_for_Pet_Clinic.View
+namespace MSPC.View
 {
     public class AppointmentMenuView
     {
@@ -23,10 +23,15 @@ namespace Management_System_for_Pet_Clinic.View
                 switch (selection)
                 {
                     case '1':
-                      
+                        Console.Clear();
+                        
+                        
                         break;
                     case '2':
                        
+                        break;
+                    case '3':
+
                         break;
                     case 'q':
                     case 'Q':
@@ -47,8 +52,9 @@ namespace Management_System_for_Pet_Clinic.View
             Console.Clear();
             Console.WriteLine("----- Menu -----");
             Console.WriteLine("1. Appointments");
-            Console.WriteLine("2. Change appointment");
-            Console.WriteLine("3. Finish appointment");
+            Console.WriteLine("2. Schedule appointment");
+            Console.WriteLine("3. Change appointment");
+            Console.WriteLine("4. Finish appointment");
             Console.WriteLine("Q. Back");
             Console.WriteLine("----------------");
             Console.Write("Select an option: ");

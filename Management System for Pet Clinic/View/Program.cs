@@ -2,7 +2,6 @@
 using MSPC.Model;
 using System.Collections.Generic;
 using MSPC.View;
-using Management_System_for_Pet_Clinic.View;
 
 namespace MSPC //Management System for Pet Clinic
 {
@@ -32,7 +31,7 @@ namespace MSPC //Management System for Pet Clinic
                         StaffMenuView.StaffMenuSwitch(sharedList);
                         break;
                     case '2':
-                        AppointmentMenuView.AppointmentMenuSwitch();
+                        //AppointmentMenuView.AppointmentMenuSwitch();
                        
                         break;
                     case '3':

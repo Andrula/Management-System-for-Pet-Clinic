@@ -35,7 +35,8 @@ namespace MSPC.Model
         // Constructor
         public Appointment()
         {
-            ID = _appointmentID++;
+            ID = _appointmentID;
+            _appointmentID++;
         }
 
         // Methods

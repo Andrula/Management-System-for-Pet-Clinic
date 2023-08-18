@@ -18,7 +18,6 @@ namespace MSPC.Model
         private static int _staffID = 1;
 
         // Properties
-
         public StaffPosition Position { get; set; }
 
         public int ID { get; }
@@ -30,7 +29,7 @@ namespace MSPC.Model
             {
                 if (value.Year <= 1900)
                 {
-                    throw new Exception("Date is out of range!");
+                    throw new Exception("Date out of range");
                 }
                 _dateOfBirth = value;
             }
@@ -39,12 +38,20 @@ namespace MSPC.Model
         // Constructor
         public Staff()
         {
-            // Assign the current _staffID to ID and then increment it.
-            ID = _staffID; 
-            _staffID++;
+            try
+            {
+                // Assign the current _staffID to ID and then increment it.
+                ID = _staffID;
+                _staffID++;
 
-            // Add each instance to the static list
-            staffList.Add(this);
+                // Add each instance to the static list
+                staffList.Add(this);
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Failed to create staff member. Reason: {ex.Message}");
+                Console.ReadKey();
+            }
         }
 
         // Methods

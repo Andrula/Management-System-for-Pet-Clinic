@@ -28,7 +28,7 @@ namespace MSPC.View
 
                         Console.WriteLine("CEO,\r\nSurgeon,\r\nNurse,\r\nReceptionist,\r\nAssistant");
                         Console.Write("Enter staff position from the given list: ");
-                        string position = Console.ReadLine();
+                        string position = Console.ReadLine().ToUpper();
 
                         Console.Write("Enter staff date of birth (YYYY-MM-DD): ");
                         string dateOfBirthString = Console.ReadLine();

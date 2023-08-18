@@ -15,14 +15,21 @@ namespace MSPC.Model
         public DateTime DateOfBirth { get; set; }
         public Customer Owner { get; set; }
 
+        // Properties for MedicalHistory and Appointment lists
+        public List<MedicalHistory> History { get; set; }
+        public List<Appointment> Appointments { get; set; }
+
         // Methods
 
         public Pet(string name, string species, DateTime date, Customer owner)
         {
-            Name = name;
-            Species = species;
-            DateOfBirth = date;
-            Owner = owner;
+            this.Name = name;
+            this.Species = species;
+            this.DateOfBirth = date;
+            this.Owner = owner;
+
+            this.History = new List<MedicalHistory>();
+            this.Appointments = new List<Appointment>();
         }
     }
 }

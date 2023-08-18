@@ -16,10 +16,15 @@ namespace MSPC.Model
         // Properties
         public int ID { get; }
 
+        public List<Pet> Pets { get; set; }
+
         public Customer()
         {
             ID = _customerID;
             _customerID++;
+
+            // Initialization of empty lists in the constructor
+            Pets = new List<Pet>();
         }
 
         public override void DisplayInfo()
