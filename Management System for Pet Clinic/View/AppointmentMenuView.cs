@@ -10,7 +10,7 @@ namespace MSPC.View
 {
     public class AppointmentMenuView
     {
-        public static void AppointmentMenuSwitch(List<Appointment> appointmentList)
+        public static void AppointmentMenuSwitch()
         {
             bool isRunning = true;
 
@@ -23,10 +23,13 @@ namespace MSPC.View
                 switch (selection)
                 {
                     case '1':
-                        Console.Clear();
-                        CreateAppointment(appointmentList);
+                        Console.WriteLine("Appointment list.");
+                        PrintAllAppointments(Appointment.GetAllApointments());
+                        Console.ReadKey();
                         break;
                     case '2':
+                        Console.Clear();
+                        CreateAppointment();
                        
                         break;
                     case '3':
@@ -59,7 +62,9 @@ namespace MSPC.View
             Console.Write("Select an option: ");
         }
 
-        static void CreateAppointment(List<Appointment> appointmentList, List<Pet> petsList, List<Staff> staffList)
+
+
+        static void CreateAppointment()
         {
             try
             {
@@ -75,13 +80,19 @@ namespace MSPC.View
                 Console.Write("Enter responsible staff name: ");
                 string staffName = Console.ReadLine();
 
-                Staff staff = Staff.FindStaffByName(staffList, staffName);
+                Staff staff = Staff.FindStaffByName(Staff.GetStaffList(), staffName);
 
-                Pet pet = Pet.FindPetByName(petsList, staffName);
+                Pet pet = Pet.FindPetByName(Pet.GetAllPets(), staffName);
 
                 if (staff == null)
                 {
                     Console.WriteLine("Staff not found.");
+                    return;
+                }
+
+                if (pet == null)
+                {
+                    Console.WriteLine("Pet not found");
                     return;
                 }
 
@@ -91,7 +102,7 @@ namespace MSPC.View
                 Appointment newAppointment = new Appointment();
                 newAppointment.Schedule(dateAndTime, duration, pet, staff, purpose);
 
-                appointmentList.Add(newAppointment);
+                Appointment.AddAppointment(newAppointment);
 
                 Console.WriteLine("Appointment created successfully.");
             }
@@ -102,5 +113,15 @@ namespace MSPC.View
 
             Console.ReadKey();
         }
+
+        static void PrintAllAppointments(List<Appointment> appointmentList)
+        {
+            foreach (var appointment in appointmentList)
+            {
+                appointment.PrintAppointmentDetails();
+            }
+            Console.ReadLine();
+        }
+
     }
 }

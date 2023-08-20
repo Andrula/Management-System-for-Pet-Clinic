@@ -3,12 +3,10 @@ using MSPC.Model;
 using System.Collections.Generic;
 using MSPC.View;
 
-namespace MSPC //Management System for Pet Clinic
+namespace MSPC
 {
     public class Program
     {
-        // Shared static list.
-        public static List<Staff> sharedList = Staff.GetStaffList();
 
         static void Main(string[] args)
         {
@@ -23,16 +21,13 @@ namespace MSPC //Management System for Pet Clinic
                 switch (selection)
                 {
                     case '1':
-                        // Instance reference 
-                        //StaffMenuView staffMenuView = new StaffMenuView();
-                        //staffMenuView.StaffMenuSwitch(sharedList);
-                        
                         // Reference
-                        StaffMenuView.StaffMenuSwitch(sharedList);
+                        StaffMenuView.StaffMenuSwitch();
                         break;
                     case '2':
-                        //AppointmentMenuView.AppointmentMenuSwitch();
-                       
+                        // Reference
+                        AppointmentMenuView.AppointmentMenuSwitch();
+
                         break;
                     case '3':
                         // Handle option 3
@@ -57,12 +52,13 @@ namespace MSPC //Management System for Pet Clinic
             }
         }
 
+        // View for the user..
         static void DisplayMenu()
         {
             Console.Clear();
             Console.WriteLine("----- Menu -----");
             Console.WriteLine("1. Staff Menu");
-            Console.WriteLine("3. Option 3");
+            Console.WriteLine("3. Appointment Menu");
             Console.WriteLine("4. Option 4");
             Console.WriteLine("Q. Quit");
             Console.WriteLine("----------------");

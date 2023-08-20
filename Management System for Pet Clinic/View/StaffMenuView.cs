@@ -8,7 +8,7 @@ namespace MSPC.View
 {
     public class StaffMenuView
     {
-        public static void StaffMenuSwitch(List<Staff> staffList)
+        public static void StaffMenuSwitch()
         {
             bool isRunning = true;
 
@@ -54,7 +54,7 @@ namespace MSPC.View
                         break;
                     case '2':
                         Console.WriteLine("Staff list.");
-                        foreach (var staff in staffList)
+                        foreach (var staff in Staff.GetStaffList())
                         {
                             staff.DisplayInfo();
                         }
