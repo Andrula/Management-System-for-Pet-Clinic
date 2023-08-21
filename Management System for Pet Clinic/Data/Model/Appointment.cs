@@ -11,7 +11,7 @@ namespace MSPC.Model
         private static List<Appointment> appointmentList = new List<Appointment>();
 
         #region Fields
-        private static int _appointmentID = 1;
+        private static int _appointmentID = 0;
         private DateTime _dateTime;
 
         #endregion

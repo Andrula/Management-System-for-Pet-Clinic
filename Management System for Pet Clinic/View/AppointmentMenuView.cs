@@ -62,8 +62,6 @@ namespace MSPC.View
             Console.Write("Select an option: ");
         }
 
-
-
         static void CreateAppointment()
         {
             try

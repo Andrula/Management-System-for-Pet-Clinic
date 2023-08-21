@@ -13,6 +13,5 @@ namespace MSPC.Enums
         Nurse,
         Receptionist,
         Assistant
-
     }
 }

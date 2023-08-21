@@ -10,6 +10,7 @@ namespace MSPC.View
     {
         public static void StaffMenuSwitch()
         {
+
             bool isRunning = true;
 
             while (isRunning)
@@ -49,6 +50,8 @@ namespace MSPC.View
                             Phone = phone
                         };
 
+                        Staff.AddStaff(newStaff);   
+
                         Console.WriteLine("New staff member created successfully.");
                         Console.ReadKey();
                         break;
@@ -58,11 +61,12 @@ namespace MSPC.View
                         {
                             staff.DisplayInfo();
                         }
+                        Console.WriteLine("Press Q to go back.");
                         Console.ReadKey();
                         break;
                     case 'q':
                     case 'Q':
-                        // Quit the program
+                        // Go out of the loop and return to main menu
                         Console.WriteLine("Exiting the program...");
                         isRunning = false;
                         break;

@@ -63,8 +63,5 @@
   <ItemGroup>
     <Folder Include="Interface\" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Website Links\Links.txt" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

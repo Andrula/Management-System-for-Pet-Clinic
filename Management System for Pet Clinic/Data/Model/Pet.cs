@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,28 +12,39 @@ namespace MSPC.Model
         // Static list
         private static List<Pet> petList = new List<Pet>();
 
-        // Properties
+        #region Fields
+        private static int _petID = 1;
+        #endregion
+
+        #region Properties
         public int ID { get; set; }
         public string Name { get; set; }
         public string Species { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public int Age { get; set; }
         public Customer Owner { get; set; }
 
-        // Properties for MedicalHistory and Appointment lists
         public List<MedicalHistory> History { get; set; }
         public List<Appointment> Appointments { get; set; }
+        #endregion
 
-        // Methods
+        #region Constructor(s)
 
-        public Pet(string name, string species, DateTime date, Customer owner)
+        public Pet(string name, string species, int age, Customer owner)
         {
+            this.ID = _petID;
             this.Name = name;
             this.Species = species;
-            this.DateOfBirth = date;
+            this.Age = age;
             this.Owner = owner;
 
-            this.History = new List<MedicalHistory>();
-            this.Appointments = new List<Appointment>();
+            _petID++;
+        }
+        #endregion
+
+        #region Methods
+        public static void AddPet(Pet pet)
+        {
+            petList.Add(pet);
         }
 
         public static List<Pet> GetAllPets()
@@ -40,10 +52,20 @@ namespace MSPC.Model
             return petList;
         }
 
-        public static Pet FindPetByName(List<Pet> pets ,string name)
+        public static Pet FindPetByID(List<Pet> pets , int petID)
         {
-            return pets.Find(x => x.Name == name);
+            return pets.Find(x => x.ID == petID);
         }
-        
+
+        public static Pet FindPetByName(List<Pet> pets, string petName)
+        {
+            return pets.Find(x => x.Name == petName);
+        }
+
+        public void DisplayInfo()
+        {
+            Console.WriteLine($"Pet ID: {ID} Pet name: {Name} Age: {Age}");
+        }
+        #endregion
     }
 }

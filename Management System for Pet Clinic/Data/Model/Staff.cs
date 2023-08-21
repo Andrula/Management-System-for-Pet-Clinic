@@ -13,11 +13,12 @@ namespace MSPC.Model
         // Static list
         private static List<Staff> staffList = new List<Staff>();
 
-        // Fields
+        #region Fields
         private DateTime _dateOfBirth;
-        private static int _staffID = 1;
+        private static int _staffID = 0;
+        #endregion
 
-        // Properties
+        #region Properties
         public StaffPosition Position { get; set; }
 
         public int ID { get; }
@@ -34,18 +35,15 @@ namespace MSPC.Model
                 _dateOfBirth = value;
             }
         }
+        #endregion
 
-        // Constructor
+        #region Constructor(s)
         public Staff()
         {
             try
             {
-                // Assign the current _staffID to ID and then increment it.
                 ID = _staffID;
                 _staffID++;
-
-                // Add each instance to the static list
-                staffList.Add(this);
             }
             catch (ArgumentException ex)
             {
@@ -53,11 +51,17 @@ namespace MSPC.Model
                 Console.ReadKey();
             }
         }
+        #endregion
 
-        // Methods
+        #region Methods
         public static List<Staff> GetStaffList()
         {
             return staffList;
+        }
+
+        public static void AddStaff(Staff staff)
+        {
+            staffList.Add(staff);
         }
 
         public static Staff FindStaffByName(List<Staff> staffList, string name)
@@ -69,8 +73,6 @@ namespace MSPC.Model
         {
             Console.WriteLine($"Staff ID: {ID} Staff: {Name} Position: {Position} Date of birth: {DateOfBirth.ToShortDateString()} Email: {Email} Phone: {Phone}");
         }
-
-
-
+        #endregion
     }
 }

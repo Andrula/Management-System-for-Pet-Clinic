@@ -1,8 +1,0 @@
-﻿1.
-https://www.martinfowler.com/bliki/AnemicDomainModel.html
-
-Artikel beskriver forskellen på Anemic Domain Model (Model der indeholder data (properties) og manglende business logik) 
-og Rich Domain Model (Model der indeholder både data (properties) og business logik til og behandle data).
-
-2. 
-
