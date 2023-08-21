@@ -21,21 +21,18 @@ namespace MSPC
                 switch (selection)
                 {
                     case '1':
-                        // Reference
-                        StaffMenuView.StaffMenuSwitch();
+
                         break;
                     case '2':
-                        // Reference
-                        AppointmentMenuView.AppointmentMenuSwitch();
 
                         break;
                     case '3':
-                        // Handle option 3
-                        Console.WriteLine("Option 3 selected");
+                        // Reference
+                        AppointmentMenuView.AppointmentMenuSwitch();
                         break;
                     case '4':
-                        // Handle option 4
-                        Console.WriteLine("Option 4 selected");
+                        // Reference
+                        StaffMenuView.StaffMenuSwitch();
                         break;
                     case 'q':
                     case 'Q':

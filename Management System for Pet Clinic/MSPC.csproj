@@ -51,6 +51,8 @@
     <Compile Include="Data\Model\Staff.cs" />
     <Compile Include="Enums\StaffPosition.cs" />
     <Compile Include="View\AppointmentMenuView.cs" />
+    <Compile Include="View\CustomerMenuView.cs" />
+    <Compile Include="View\PetMenuView.cs" />
     <Compile Include="View\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\StaffMenuView.cs" />
