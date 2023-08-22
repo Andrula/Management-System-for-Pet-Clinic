@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MSCP.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MSPC.Model
 {
-    public class Pet
+    public class Pet : IDataPet
     {
         // Static list
         private static List<Pet> petList = new List<Pet>();
@@ -23,7 +24,7 @@ namespace MSPC.Model
         public int Age { get; set; }
         public Customer Owner { get; set; }
 
-        public List<MedicalHistory> History { get; set; }
+        public List<NOTUSEDMedicalHistory> History { get; set; }
         public List<Appointment> Appointments { get; set; }
         #endregion
 
@@ -65,6 +66,11 @@ namespace MSPC.Model
         public void DisplayInfo()
         {
             Console.WriteLine($"Pet ID: {ID} Pet name: {Name} Age: {Age}");
+        }
+
+        public List<Pet> GetAll()
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

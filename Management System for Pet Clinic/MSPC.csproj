@@ -45,11 +45,14 @@
   <ItemGroup>
     <Compile Include="Data\Model\Appointment.cs" />
     <Compile Include="Data\Model\Customer.cs" />
-    <Compile Include="Data\Model\MedicalHistory.cs" />
+    <Compile Include="Data\Model\NOTUSEDMedicalHistory.cs" />
     <Compile Include="Data\Model\Person.cs" />
     <Compile Include="Data\Model\Pet.cs" />
     <Compile Include="Data\Model\Staff.cs" />
     <Compile Include="Enums\StaffPosition.cs" />
+    <Compile Include="Interface\IDataCustomer.cs" />
+    <Compile Include="Interface\IDataPet.cs" />
+    <Compile Include="Interface\IDataStaff.cs" />
     <Compile Include="View\AppointmentMenuView.cs" />
     <Compile Include="View\CustomerMenuView.cs" />
     <Compile Include="View\PetMenuView.cs" />
@@ -59,9 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="Data\Files\customer.txt" />
+    <Content Include="Data\Files\pet.txt" />
+    <Content Include="Data\Files\staff.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interface\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

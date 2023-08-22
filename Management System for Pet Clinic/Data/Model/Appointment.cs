@@ -13,7 +13,6 @@ namespace MSPC.Model
         #region Fields
         private static int _appointmentID = 0;
         private DateTime _dateTime;
-
         #endregion
 
         #region Properties
@@ -74,6 +73,11 @@ namespace MSPC.Model
             Status = "Canceled";
         }
 
+        public void Underway()
+        {
+            Status = "Underway";
+        }
+
         public void Complete()
         {
             Status = "Completed";
@@ -84,13 +88,19 @@ namespace MSPC.Model
             appointmentList.Add(appointment);
         }
 
-        public static List<Appointment> GetAllApointments()
+        public static List<Appointment> GetAllAppointments()
         {
             return appointmentList;
         }
 
+        public static Appointment FindAppointmentByID(List<Appointment> appointmentList, int appId)
+        {
+            return appointmentList.Find(s => s.ID == appId);
+        }
+
         public void PrintAppointmentDetails()
         {
+            Console.Clear();
             Console.WriteLine($"Appointment ID: {ID}");
             Console.WriteLine($"Date and Time: {DateAndTime}");
             Console.WriteLine($"Duration: {DurationInMinutes} minutes");
@@ -99,6 +109,7 @@ namespace MSPC.Model
             Console.WriteLine($"Purpose: {Purpose}");
             Console.WriteLine($"Status: {Status}");
             Console.WriteLine($"Additional Information: {Note}");
+            Console.WriteLine("---------------------------------------------------");
         }
         #endregion
     }

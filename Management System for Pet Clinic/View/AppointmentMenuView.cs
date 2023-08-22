@@ -24,15 +24,40 @@ namespace MSPC.View
                 {
                     case '1':
                         Console.WriteLine("Appointment list.");
-                        PrintAllAppointments(Appointment.GetAllApointments());
+                        PrintAllAppointments(Appointment.GetAllAppointments());
                         Console.ReadKey();
                         break;
                     case '2':
                         Console.Clear();
                         CreateAppointment();
-                       
                         break;
                     case '3':
+                        Console.Write("Enter appointment ID: ");
+                        if (int.TryParse(Console.ReadLine(), out int appointmentId))
+                        {
+                            Appointment existingAppointment = Appointment.FindAppointmentByID(Appointment.GetAllAppointments(), appointmentId);
+
+                            if (existingAppointment != null)
+                            {
+                                Console.Write("Enter new date: ");
+                                DateTime newDate = DateTime.Parse(Console.ReadLine());
+
+                                // Call the Reschedule method or update the DateAndTime property
+                                existingAppointment.Reschedule(newDate); // Assuming Reschedule method exists
+
+                                Console.WriteLine("Appointment rescheduled successfully.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Appointment not found.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid appointment ID.");
+                        }
+
+                        Console.ReadKey();
 
                         break;
                     case 'q':
@@ -55,7 +80,7 @@ namespace MSPC.View
             Console.WriteLine("----- Menu -----");
             Console.WriteLine("1. Appointments");
             Console.WriteLine("2. Schedule appointment");
-            Console.WriteLine("3. Change appointment");
+            Console.WriteLine("3. Reschedule appointment");
             Console.WriteLine("4. Finish appointment");
             Console.WriteLine("Q. Back");
             Console.WriteLine("----------------");

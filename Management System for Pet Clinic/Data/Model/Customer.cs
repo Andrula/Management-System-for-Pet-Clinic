@@ -1,4 +1,5 @@
-﻿using MSPC.Data.Model;
+﻿using MSCP.Interface;
+using MSPC.Data.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MSPC.Model
 {
-    public class Customer : Person
+    public class Customer : Person, IDataCustomer
     {
         private static List<Customer> customerList = new List<Customer>();
         public List<Pet> Pets { get; set; }
@@ -66,6 +67,11 @@ namespace MSPC.Model
         public override void DisplayInfo()
         {
             Console.WriteLine($"Customer: {Name}, Email: {Email}, Phone: {Phone}, Customer ID: {ID}");
+        }
+
+        public List<Customer> GetData()
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

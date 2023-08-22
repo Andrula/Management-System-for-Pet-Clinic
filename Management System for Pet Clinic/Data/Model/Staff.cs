@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MSCP.Interface;
+using System.IO;
 
 namespace MSPC.Model
 {
-    public class Staff : Person
+    public class Staff : Person, IDataStaff
     {
         // Static list
         private static List<Staff> staffList = new List<Staff>();
@@ -72,6 +74,31 @@ namespace MSPC.Model
         public override void DisplayInfo()
         {
             Console.WriteLine($"Staff ID: {ID} Staff: {Name} Position: {Position} Date of birth: {DateOfBirth.ToShortDateString()} Email: {Email} Phone: {Phone}");
+        }
+
+        List<Staff> IDataStaff.GetAll()
+        {
+            List<Staff> staffList = new List<Staff>();
+
+            string[] lines = File.ReadAllLines("staff.txt");
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split('|'); 
+                if (parts.Length >= 5) 
+                {
+                    Staff staff = new Staff
+                    {
+                        Name = parts[0],
+                        Position = (StaffPosition)Enum.Parse(typeof(StaffPosition), parts[1]),
+                        DateOfBirth = DateTime.Parse(parts[2]),
+                        Email = parts[3],
+                        Phone = parts[4],
+
+                    };
+                    staffList.Add(staff);
+                }
+            }
+            return staffList;
         }
         #endregion
     }

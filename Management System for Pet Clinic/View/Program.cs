@@ -14,9 +14,10 @@ namespace MSPC
         {
             bool isRunning = true;
 
+            InitiazeDummyData();
+            
             while (isRunning)
             {
-                InitiazeDummyData();
                 DisplayMenu();
                 char selection = Console.ReadKey().KeyChar;
                 Console.WriteLine();
@@ -68,13 +69,13 @@ namespace MSPC
             Console.Write("Select an option: ");
         }
 
+        #region Dummy data
+
         static void InitiazeDummyData()
         {
-            #region Dummy data
-
             Customer customer1 = new Customer
             {
-                Name = "John Doe",
+                Name = "Customer",
                 Email = "john@example.com",
                 Phone = "20202020",
                 Address = "Randersgade"
@@ -82,7 +83,7 @@ namespace MSPC
 
             Customer customer2 = new Customer
             {
-                Name = "Jane Smith",
+                Name = "Jane",
                 Email = "jane@example.com",
                 Phone = "90293812",
                 Address = "Jyllandsgade"
@@ -90,7 +91,7 @@ namespace MSPC
 
             Customer customer3 = new Customer
             {
-                Name = "Michael Johnson",
+                Name = "John",
                 Email = "michael@example.com",
                 Phone = "55512345",
                 Address = "Bogensegade"
@@ -101,7 +102,7 @@ namespace MSPC
             Customer.AddCustomer(customer3);
 
             // Create pets for each customer
-            Pet pet1 = new Pet("Buddy", "Dog", 5, customer1);
+            Pet pet1 = new Pet("Pet", "Dog", 5, customer1);
             Pet pet2 = new Pet("Whiskers", "Cat", 3, customer1);
 
             Pet pet3 = new Pet("Fluffy", "Cat", 2, customer2);
@@ -120,8 +121,8 @@ namespace MSPC
 
             Staff staff1 = new Staff
             {
-                Name = "John Smith",
-                Email = "john@example.com",
+                Name = "staff",
+                Email = "staff@example.com",
                 Phone = "20398283",
                 Position = StaffPosition.Assistant,
                 DateOfBirth = new DateTime(1985, 5, 10)
@@ -129,8 +130,8 @@ namespace MSPC
 
             Staff staff2 = new Staff
             {
-                Name = "Jane Doe",
-                Email = "jane@example.com",
+                Name = "Jonas",
+                Email = "jonas@example.com",
                 Phone = "39283723",
                 Position = StaffPosition.Nurse,
                 DateOfBirth = new DateTime(1990, 3, 15)
@@ -138,7 +139,7 @@ namespace MSPC
 
             Staff staff3 = new Staff
             {
-                Name = "Michael Johnson",
+                Name = "Michael",
                 Email = "michael@example.com",
                 Phone = "22203928",
                 Position = StaffPosition.Receptionist,
@@ -158,7 +159,20 @@ namespace MSPC
             Staff.AddStaff(staff2);
             Staff.AddStaff(staff3);
             Staff.AddStaff(staff4);
-            #endregion
+
+            Appointment appointment = new Appointment();
+            {
+                appointment.Patient = pet1;
+                appointment.Purpose = "Operaion";
+                appointment.DateAndTime = new DateTime(2024, 01, 01, 09, 30, 00);
+                appointment.ResponsibleStaff = staff1;
+                appointment.DurationInMinutes = 30;
+                appointment.Status = "Underway";
+                appointment.Note = "The custome rhas complained that his dog cannot walk properly any longer";
+            }
+
+            Appointment.AddAppointment(appointment);
         }
+            #endregion
     }
 }

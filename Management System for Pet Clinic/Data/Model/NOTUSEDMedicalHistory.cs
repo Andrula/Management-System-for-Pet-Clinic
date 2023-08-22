@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MSPC.Model
 {
-    public abstract class MedicalHistory
+    public abstract class NOTUSEDMedicalHistory
     {
         public int ID { get; set; }
         public Pet Pet { get; set; }
@@ -16,13 +16,13 @@ namespace MSPC.Model
 
     }
 
-    public class VaccinationHistory : MedicalHistory
+    public class VaccinationHistory : NOTUSEDMedicalHistory
     {
         public string VaccineName { get; set; }
         public DateTime VaccinationDate { get; set; }
     }
 
-    public class SurgeryHistory : MedicalHistory
+    public class SurgeryHistory : NOTUSEDMedicalHistory
     {
         public Staff SurgeonName { get; set; }
         public DateTime SurgeryDate { get; set; }
