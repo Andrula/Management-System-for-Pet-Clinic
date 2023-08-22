@@ -1,6 +1,7 @@
 ﻿using MSPC.Enums;
 using MSPC.Model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 
@@ -29,7 +30,7 @@ namespace MSPC.View
 
                         Console.WriteLine("CEO,\r\nSurgeon,\r\nNurse,\r\nReceptionist,\r\nAssistant");
                         Console.Write("Enter staff position from the given list: ");
-                        string position = Console.ReadLine().ToUpper();
+                        string position = Console.ReadLine();
 
                         Console.Write("Enter staff date of birth (YYYY-MM-DD): ");
                         string dateOfBirthString = Console.ReadLine();
@@ -41,26 +42,33 @@ namespace MSPC.View
                         Console.Write("Enter staff phone: ");
                         string phone = Console.ReadLine();
 
-                        Staff newStaff = new Staff
-                        {
-                            Name = name,
-                            Position = (StaffPosition)Enum.Parse(typeof(StaffPosition), position),
-                            DateOfBirth = dateOfBirth,
-                            Email = email,
-                            Phone = phone
-                        };
+                        //Staff newStaff = new Staff
+                        //{
+                        //    Name = name,
+                        //    Position = (StaffPosition)Enum.Parse(typeof(StaffPosition), position),
+                        //    DateOfBirth = dateOfBirth,
+                        //    Email = email,
+                        //    Phone = phone
+                        //};
 
-                        Staff.AddStaff(newStaff);   
+                        // Instance that uses constructor.
+                        Staff newStaff = new Staff(name, (StaffPosition)Enum.Parse(typeof(StaffPosition), position), dateOfBirth, email, phone);
+
+                        newStaff.AddStaffAndSave(newStaff);
 
                         Console.WriteLine("New staff member created successfully.");
                         Console.ReadKey();
                         break;
                     case '2':
                         Console.WriteLine("Staff list.");
-                        foreach (var staff in Staff.GetStaffList())
+                        List<Staff> allStaff = new Staff().GetData();
+                        Console.Clear();
+                        Console.WriteLine("Staff list:");
+                        foreach (var staff in allStaff)
                         {
                             staff.DisplayInfo();
                         }
+
                         Console.WriteLine("Press Q to go back.");
                         Console.ReadKey();
                         break;

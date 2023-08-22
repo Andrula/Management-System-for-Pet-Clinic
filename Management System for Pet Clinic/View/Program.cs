@@ -73,105 +73,81 @@ namespace MSPC
 
         static void InitiazeDummyData()
         {
-            Customer customer1 = new Customer
-            {
-                Name = "Customer",
-                Email = "john@example.com",
-                Phone = "20202020",
-                Address = "Randersgade"
-            };
+           // Customer customer1 = new Customer
+           // {
+           //     Name = "Customer",
+           //     Email = "john@example.com",
+           //     Phone = "20202020",
+           //     Address = "Randersgade"
+           // };
 
-            Customer customer2 = new Customer
-            {
-                Name = "Jane",
-                Email = "jane@example.com",
-                Phone = "90293812",
-                Address = "Jyllandsgade"
-            };
+           // Customer customer2 = new Customer
+           // {
+           //     Name = "Jane",
+           //     Email = "jane@example.com",
+           //     Phone = "90293812",
+           //     Address = "Jyllandsgade"
+           // };
 
-            Customer customer3 = new Customer
-            {
-                Name = "John",
-                Email = "michael@example.com",
-                Phone = "55512345",
-                Address = "Bogensegade"
-            };
+           // Customer customer3 = new Customer
+           // {
+           //     Name = "John",
+           //     Email = "michael@example.com",
+           //     Phone = "55512345",
+           //     Address = "Bogensegade"
+           // };
 
-            Customer.AddCustomer(customer1);
-            Customer.AddCustomer(customer2);
-            Customer.AddCustomer(customer3);
+           // Customer.AddCustomer(customer1);
+           // Customer.AddCustomer(customer2);
+           // Customer.AddCustomer(customer3);
 
-            // Create pets for each customer
-            Pet pet1 = new Pet("Pet", "Dog", 5, customer1);
-            Pet pet2 = new Pet("Whiskers", "Cat", 3, customer1);
+           // Create pets for each customer
 
-            Pet pet3 = new Pet("Fluffy", "Cat", 2, customer2);
-            Pet pet4 = new Pet("Rex", "Dog", 7, customer2);
+           //Pet pet1 = new Pet("Pet", "Dog", 5, customer1);
+           // Pet pet2 = new Pet("Whiskers", "Cat", 3, customer1);
 
-            Pet pet5 = new Pet("Max", "Dog", 4, customer3);
-            Pet pet6 = new Pet("Charlie", "Rabbit", 1, customer3);
+           // Pet pet3 = new Pet("Fluffy", "Cat", 2, customer2);
+           // Pet pet4 = new Pet("Rex", "Dog", 7, customer2);
 
-            // Add pets to the petList
-            Pet.AddPet(pet1);
-            Pet.AddPet(pet2);
-            Pet.AddPet(pet3);
-            Pet.AddPet(pet4);
-            Pet.AddPet(pet5);
-            Pet.AddPet(pet6);
+           // Pet pet5 = new Pet("Max", "Dog", 4, customer3);
+           // Pet pet6 = new Pet("Charlie", "Rabbit", 1, customer3);
 
-            Staff staff1 = new Staff
-            {
-                Name = "staff",
-                Email = "staff@example.com",
-                Phone = "20398283",
-                Position = StaffPosition.Assistant,
-                DateOfBirth = new DateTime(1985, 5, 10)
-            };
+           // Add pets to the petList
+           // Pet.AddPet(pet1);
+           // Pet.AddPet(pet2);
+           // Pet.AddPet(pet3);
+           // Pet.AddPet(pet4);
+           // Pet.AddPet(pet5);
+           // Pet.AddPet(pet6);
 
-            Staff staff2 = new Staff
-            {
-                Name = "Jonas",
-                Email = "jonas@example.com",
-                Phone = "39283723",
-                Position = StaffPosition.Nurse,
-                DateOfBirth = new DateTime(1990, 3, 15)
-            };
 
-            Staff staff3 = new Staff
-            {
-                Name = "Michael",
-                Email = "michael@example.com",
-                Phone = "22203928",
-                Position = StaffPosition.Receptionist,
-                DateOfBirth = new DateTime(1988, 8, 20)
-            };
 
-            Staff staff4 = new Staff
-            {
-                Name = "Alice CEO",
-                Email = "alice@example.com",
-                Phone = "20201919",
-                Position = StaffPosition.CEO,
-                DateOfBirth = new DateTime(1975, 12, 5)
-            };
+           // Staff staff4 = new Staff
+           // {
+           //     Name = "Alice CEO",
+           //     Email = "alice@example.com",
+           //     Phone = "20201919",
+           //     Position = StaffPosition.CEO,
+           //     DateOfBirth = new DateTime(1975, 12, 5)
+           // };
 
-            Staff.AddStaff(staff1);
-            Staff.AddStaff(staff2);
-            Staff.AddStaff(staff3);
-            Staff.AddStaff(staff4);
+           // Staff.AddStaff(staff1);
+           // Staff.AddStaff(staff2);
+           // Staff.AddStaff(staff3);
+           // Staff.AddStaff(staff4);
 
-            Appointment appointment = new Appointment();
-            {
-                appointment.Patient = pet1;
-                appointment.Purpose = "Operaion";
-                appointment.DateAndTime = new DateTime(2024, 01, 01, 09, 30, 00);
-                appointment.ResponsibleStaff = staff1;
-                appointment.DurationInMinutes = 30;
-                appointment.Status = "Underway";
-                appointment.Note = "The custome rhas complained that his dog cannot walk properly any longer";
-            }
+           // Appointment appointment = new Appointment();
+           // {
+           //     appointment.Patient = pet1;
+           //     appointment.Purpose = "Operaion";
+           //     appointment.DateAndTime = new DateTime(2024, 01, 01, 09, 30, 00);
+           //     appointment.ResponsibleStaff = staff1;
+           //     appointment.DurationInMinutes = 30;
+           //     appointment.Status = "Underway";
+           //     appointment.Note = "The custome rhas complained that his dog cannot walk properly any longer";
+           // }
 
-            Appointment.AddAppointment(appointment);
+           // Appointment.AddAppointment(appointment);
         }
             #endregion
     }

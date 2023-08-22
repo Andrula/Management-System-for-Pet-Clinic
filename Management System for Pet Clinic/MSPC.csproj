@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Data\Model\Appointment.cs" />
     <Compile Include="Data\Model\Customer.cs" />
-    <Compile Include="Data\Model\NOTUSEDMedicalHistory.cs" />
     <Compile Include="Data\Model\Person.cs" />
     <Compile Include="Data\Model\Pet.cs" />
     <Compile Include="Data\Model\Staff.cs" />
@@ -62,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="Data\Files\appointment.txt" />
     <Content Include="Data\Files\customer.txt" />
     <Content Include="Data\Files\pet.txt" />
     <Content Include="Data\Files\staff.txt" />

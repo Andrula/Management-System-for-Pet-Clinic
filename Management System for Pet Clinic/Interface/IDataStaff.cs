@@ -9,6 +9,6 @@ namespace MSCP.Interface
 {
     public interface IDataStaff
     {
-        List<Staff> GetAll();
+        List<Staff> GetData();
     }
 }

@@ -17,13 +17,13 @@ namespace MSPC.Model
 
         #region Fields
         private DateTime _dateOfBirth;
-        private static int _staffID = 0;
+        //private int _staffID = 0;
         #endregion
 
         #region Properties
         public StaffPosition Position { get; set; }
 
-        public int ID { get; }
+
 
         public DateTime DateOfBirth
         {
@@ -40,30 +40,31 @@ namespace MSPC.Model
         #endregion
 
         #region Constructor(s)
+        public Staff(string name, StaffPosition position, DateTime dateOfBirth, string email, string phone)
+        {
+            Name = name;
+            Position = position;
+            DateOfBirth = dateOfBirth;
+            Email = email;
+            Phone = phone;
+
+            ID = GetNextAvailableID();
+        }
+
         public Staff()
         {
-            try
-            {
-                ID = _staffID;
-                _staffID++;
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"Failed to create staff member. Reason: {ex.Message}");
-                Console.ReadKey();
-            }
         }
         #endregion
 
         #region Methods
-        public static List<Staff> GetStaffList()
-        {
-            return staffList;
-        }
 
-        public static void AddStaff(Staff staff)
+        private static int GetNextAvailableID()
         {
-            staffList.Add(staff);
+            if (staffList.Count > 0)
+            {
+                return staffList.Max(s => s.ID) + 1;
+            }
+            return 0;
         }
 
         public static Staff FindStaffByName(List<Staff> staffList, string name)
@@ -73,32 +74,61 @@ namespace MSPC.Model
 
         public override void DisplayInfo()
         {
-            Console.WriteLine($"Staff ID: {ID} Staff: {Name} Position: {Position} Date of birth: {DateOfBirth.ToShortDateString()} Email: {Email} Phone: {Phone}");
+            Console.WriteLine($"Staff ID: {ID,-2} Staff: {Name,-10} Position: {Position,-15} Date of birth: {DateOfBirth.ToShortDateString(),-15} Email: {Email,-15} Phone: {Phone, -15}");
         }
 
-        List<Staff> IDataStaff.GetAll()
+        public List<Staff> GetData()
         {
-            List<Staff> staffList = new List<Staff>();
-
-            string[] lines = File.ReadAllLines("staff.txt");
-            foreach (string line in lines)
+            staffList.Clear(); // Clear the static list
+            var path = @"C:\Users\xAndr\source\repos\Management-System-for-Pet-Clinic\Management System for Pet Clinic\Data\Files\staff.txt";
+            try
             {
-                string[] parts = line.Split('|'); 
-                if (parts.Length >= 5) 
+                string[] lines = File.ReadAllLines(path);
+                foreach (string line in lines)
                 {
-                    Staff staff = new Staff
+                    string[] parts = line.Split('|');
+                    if (parts.Length >= 6)
                     {
-                        Name = parts[0],
-                        Position = (StaffPosition)Enum.Parse(typeof(StaffPosition), parts[1]),
-                        DateOfBirth = DateTime.Parse(parts[2]),
-                        Email = parts[3],
-                        Phone = parts[4],
+                        StaffPosition position = (StaffPosition)Enum.Parse(typeof(StaffPosition), parts[2]);
+                        DateTime dateOfBirth = DateTime.Parse(parts[3]);
 
-                    };
-                    staffList.Add(staff);
+                        Staff staff = new Staff(parts[1], position, dateOfBirth, parts[4], parts[5]);
+                        staffList.Add(staff); // Add to the static list directly
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading staff data: {ex.Message}");
+            }
+
             return staffList;
+        }
+
+
+        // Takes staff as parameter and uses string interpolation to join each element with the | splitter.
+        private string StaffToTextLine(Staff staff)
+        {
+            return $"{staff.ID}|{staff.Name}|{staff.Position}|{staff.DateOfBirth}|{staff.Email}|{staff.Phone}";
+        }
+
+        public void WriteStaffToText()
+        {
+            var path = @"C:\Users\xAndr\source\repos\Management-System-for-Pet-Clinic\Management System for Pet Clinic\Data\Files\staff.txt";
+            List<string> textLines = new List<string>();
+            foreach (Staff staff in staffList)
+            {
+                textLines.Add(StaffToTextLine(staff));
+            }
+
+            File.AppendAllLines(path, textLines);
+        }
+
+        // Takes staff as parameter and add the staff to the list + writes to text file to secure synchronization
+        public void AddStaffAndSave(Staff staff)
+        {
+            staffList.Add(staff);
+            WriteStaffToText();
         }
         #endregion
     }

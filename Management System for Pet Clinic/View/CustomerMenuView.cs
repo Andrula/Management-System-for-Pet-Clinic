@@ -14,6 +14,9 @@ namespace Management_System_for_Pet_Clinic.View
     {
         public static void CustomerMenuSwitch()
         {
+            Customer instance = new Customer();
+
+            List<Customer> list = instance.GetData();
 
             bool isRunning = true;
 
@@ -40,15 +43,9 @@ namespace Management_System_for_Pet_Clinic.View
                         Console.Write("Enter customer address: ");
                         string address = Console.ReadLine();
 
-                        Customer newCustomer = new Customer();
-                        {
-                            newCustomer.Name = name;
-                            newCustomer.Email = email;
-                            newCustomer.Phone = phone;
-                            newCustomer.Address = address;
-                        }
+                        Customer newCustomer = new Customer(name, email, phone);
 
-                        Customer.AddCustomer(newCustomer);
+                        newCustomer.AddCustomerAndSave(newCustomer);
 
                         Console.WriteLine("New customer member created successfully.");
                         Console.ReadKey();
@@ -57,7 +54,8 @@ namespace Management_System_for_Pet_Clinic.View
                     case '2':
                         Console.Clear();
                         Console.WriteLine("Customer list.");
-                        foreach (var customer in Customer.GetAllCustomers())
+
+                        foreach (var customer in list)
                         {
                             customer.DisplayInfo();
                         }
@@ -68,7 +66,7 @@ namespace Management_System_for_Pet_Clinic.View
                         Console.Write("Enter customer ID: ");
                         if (int.TryParse(Console.ReadLine(), out int customerId))
                         {
-                            Customer foundCustomer = Customer.FindCustomerById(Customer.GetAllCustomers(), customerId);
+                            Customer foundCustomer = Customer.FindCustomerById(list, customerId);
                             if (foundCustomer != null)
                             {
                                 Console.Clear();
@@ -90,7 +88,7 @@ namespace Management_System_for_Pet_Clinic.View
                         Console.Write("Enter owner's name: ");
                         string ownerName = Console.ReadLine();
 
-                        Customer owner = Customer.FindCustomerByName(Customer.GetAllCustomers(), ownerName);
+                        Customer owner = Customer.FindCustomerByName(list, ownerName);
 
                         if (owner != null)
                         {

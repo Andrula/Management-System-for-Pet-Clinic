@@ -1,1 +1,5 @@
-﻿text|CEO|1998,01,01|text|text
+0|test|CEO|01-01-1998 00:00:00|TEST|TEST
+0|test|CEO|01-01-1998 00:00:00|TEST|TEST
+1|name|Nurse|01-01-1991 00:00:00|nursemail|nursephone
+0|ok|CEO|01-01-1982 00:00:00|test|test
+0|hejny|CEO|01-01-1998 00:00:00|hejny|nehd

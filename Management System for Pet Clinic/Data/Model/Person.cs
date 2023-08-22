@@ -16,6 +16,8 @@ namespace MSPC.Data.Model
 
         // Properties (accessor methods) 
 
+        public int ID { get; set; } 
+
         public string Name
         {
             get { return _name; }

@@ -11,6 +11,9 @@ namespace Management_System_for_Pet_Clinic.View
     {
         public static void PetMenuSwitch()
         {
+            Customer instance = new Customer();
+
+            List<Customer> list = instance.GetData();
 
             bool isRunning = true;
 
@@ -37,13 +40,14 @@ namespace Management_System_for_Pet_Clinic.View
                         Console.Write("Enter owner's : ");
                         string ownerName = Console.ReadLine();
 
-                        Customer owner = Customer.FindCustomerByName(Customer.GetAllCustomers(), ownerName);
+                        Customer owner = Customer.FindCustomerByName(list, ownerName);
 
                         if (owner != null)
                         {
                             Pet pet = new Pet(petName,petSpecies, petAge, owner);
                             owner.AddPet(pet);
-                            Pet.AddPet(pet);
+
+                            pet.AddPetAndSave(pet);
 
                             Console.WriteLine("New pet created and added to the owner's list.");
                         }
@@ -58,8 +62,9 @@ namespace Management_System_for_Pet_Clinic.View
                         break;
                     case '2':
                         Console.Clear();
-                        Console.WriteLine("Pet list.");
-                        foreach (var pet in Pet.GetAllPets())
+                        List<Pet> allPets = new Pet().GetData();
+
+                        foreach (var pet in allPets)
                         {
                             pet.DisplayInfo();
                         }
@@ -69,7 +74,8 @@ namespace Management_System_for_Pet_Clinic.View
                         Console.Write("Enter pet ID: ");
                         if (int.TryParse(Console.ReadLine(), out int petID))
                         {
-                            Pet foundPet = Pet.FindPetByID(Pet.GetAllPets(), petID);
+                            List<Pet> petInstance = new Pet().GetData();
+                            Pet foundPet = Pet.FindPetByID(petInstance, petID);
                             if (foundPet != null)
                             {
                                 Console.Clear();

@@ -103,9 +103,18 @@ namespace MSPC.View
                 Console.Write("Enter responsible staff name: ");
                 string staffName = Console.ReadLine();
 
-                Staff staff = Staff.FindStaffByName(Staff.GetStaffList(), staffName);
+                // Create an instance of the Staff class
+                Staff staffInstance = new Staff();
 
-                Pet pet = Pet.FindPetByName(Pet.GetAllPets(), staffName);
+                List<Staff> allStaff = staffInstance.GetData();
+
+                Staff staff = Staff.FindStaffByName(allStaff, staffName);
+
+                Pet petInstance = new Pet();
+
+                List<Pet> allPet = petInstance.GetData();
+
+                Pet pet = Pet.FindPetByName(allPet, patientName);
 
                 if (staff == null)
                 {

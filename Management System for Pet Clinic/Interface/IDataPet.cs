@@ -9,6 +9,6 @@ namespace MSCP.Interface
 {
     public interface IDataPet
     {
-        List<Pet> GetAll();
+        List<Pet> GetData();
     }
 }
