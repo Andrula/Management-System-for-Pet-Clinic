@@ -11,7 +11,7 @@ namespace MSPC.View
     {
         public static void StaffMenuSwitch()
         {
-
+            List<Staff> allStaff = new Staff().GetData();
             bool isRunning = true;
 
             while (isRunning)
@@ -60,15 +60,12 @@ namespace MSPC.View
                         Console.ReadKey();
                         break;
                     case '2':
-                        Console.WriteLine("Staff list.");
-                        List<Staff> allStaff = new Staff().GetData();
                         Console.Clear();
                         Console.WriteLine("Staff list:");
                         foreach (var staff in allStaff)
                         {
                             staff.DisplayInfo();
                         }
-
                         Console.WriteLine("Press Q to go back.");
                         Console.ReadKey();
                         break;

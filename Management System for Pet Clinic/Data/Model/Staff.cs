@@ -10,7 +10,7 @@ using System.IO;
 
 namespace MSPC.Model
 {
-    public class Staff : Person, IDataStaff
+    public class Staff : Person
     {
         // Static list
         private static List<Staff> staffList = new List<Staff>();
@@ -76,35 +76,6 @@ namespace MSPC.Model
         {
             Console.WriteLine($"Staff ID: {ID,-2} Staff: {Name,-10} Position: {Position,-15} Date of birth: {DateOfBirth.ToShortDateString(),-15} Email: {Email,-15} Phone: {Phone, -15}");
         }
-
-        public List<Staff> GetData()
-        {
-            staffList.Clear(); // Clear the static list
-            var path = @"C:\Users\xAndr\source\repos\Management-System-for-Pet-Clinic\Management System for Pet Clinic\Data\Files\staff.txt";
-            try
-            {
-                string[] lines = File.ReadAllLines(path);
-                foreach (string line in lines)
-                {
-                    string[] parts = line.Split('|');
-                    if (parts.Length >= 6)
-                    {
-                        StaffPosition position = (StaffPosition)Enum.Parse(typeof(StaffPosition), parts[2]);
-                        DateTime dateOfBirth = DateTime.Parse(parts[3]);
-
-                        Staff staff = new Staff(parts[1], position, dateOfBirth, parts[4], parts[5]);
-                        staffList.Add(staff); // Add to the static list directly
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error reading staff data: {ex.Message}");
-            }
-
-            return staffList;
-        }
-
 
         // Takes staff as parameter and uses string interpolation to join each element with the | splitter.
         private string StaffToTextLine(Staff staff)
