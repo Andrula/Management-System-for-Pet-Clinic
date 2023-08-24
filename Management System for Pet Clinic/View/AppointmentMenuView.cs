@@ -1,4 +1,6 @@
-﻿using MSPC.Enums;
+﻿using MSCP.Interface;
+using MSPC.Data.Database;
+using MSPC.Enums;
 using MSPC.Model;
 using System;
 using System.Collections.Generic;
@@ -10,10 +12,13 @@ namespace MSPC.View
 {
     public class AppointmentMenuView
     {
-        public static void AppointmentMenuSwitch()
+        private IDataStaff MyDataGetter;
+        List<Staff> staffList;
+        public void AppointmentMenuSwitch()
         {
-            bool isRunning = true;
+            MyDataGetter = new SqlData();
 
+            bool isRunning = true;
             while (isRunning)
             {
                 DisplayAppointmentMenu();
@@ -87,7 +92,12 @@ namespace MSPC.View
             Console.Write("Select an option: ");
         }
 
-        static void CreateAppointment()
+        public void LoadData()
+        {
+            staffList = MyDataGetter.GetData();
+        }
+
+        public void CreateAppointment()
         {
             try
             {
@@ -106,9 +116,7 @@ namespace MSPC.View
                 // Create an instance of the Staff class
                 Staff staffInstance = new Staff();
 
-                List<Staff> allStaff = staffInstance.GetData();
-
-                Staff staff = Staff.FindStaffByName(allStaff, staffName);
+                Staff staff = Staff.FindStaffByName(staffList, staffName);
 
                 Pet petInstance = new Pet();
 

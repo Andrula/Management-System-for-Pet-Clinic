@@ -23,8 +23,6 @@ namespace MSPC.Model
         #region Properties
         public StaffPosition Position { get; set; }
 
-
-
         public DateTime DateOfBirth
         {
             get { return _dateOfBirth; }

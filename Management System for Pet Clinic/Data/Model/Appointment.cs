@@ -10,35 +10,14 @@ namespace MSPC.Model
     {
         private static List<Appointment> appointmentList = new List<Appointment>();
 
-        #region Fields
-        private static int _appointmentID = 0;
-        private DateTime _dateTime;
-        #endregion
-
         #region Properties
-        public int ID { get ; }
-
-        public DateTime DateAndTime {
-           get { return _dateTime; }
-           set { 
-                if (value < DateTime.Now)
-                {
-                    throw new Exception("Date is incorrect!");
-                }
-                _dateTime = value;
-            } 
-        }
-
+        public int ID { get; set; }
+        public DateTime DateAndTime { get; set; }
         public int DurationInMinutes { get; set; }
-
         public Pet Patient { get; set; }
-
         public Staff ResponsibleStaff { get; set; }
-
         public string Purpose { get; set; }
-
         public string Status { get; set; }
-
         public string Note { get; set; }
         #endregion
 
@@ -46,8 +25,6 @@ namespace MSPC.Model
         // Constructor
         public Appointment()
         {
-            ID = _appointmentID;
-            _appointmentID++;
         }
         #endregion
 

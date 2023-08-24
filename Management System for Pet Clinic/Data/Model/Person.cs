@@ -15,7 +15,6 @@ namespace MSPC.Data.Model
         private string _address;
 
         // Properties (accessor methods) 
-
         public int ID { get; set; } 
 
         public string Name

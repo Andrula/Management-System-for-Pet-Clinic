@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Database\TxtFileData.cs" />
+    <Compile Include="Data\Database\SqlData.cs" />
     <Compile Include="Data\Model\Appointment.cs" />
     <Compile Include="Data\Model\Customer.cs" />
     <Compile Include="Data\Model\Person.cs" />
@@ -62,10 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Content Include="Data\Database\TextfilesDB\appointment.txt" />
-    <Content Include="Data\Database\TextfilesDB\customer.txt" />
-    <Content Include="Data\Database\TextfilesDB\pet.txt" />
-    <Content Include="Data\Database\TextfilesDB\staff.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

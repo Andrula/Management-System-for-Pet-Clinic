@@ -1,17 +1,23 @@
-﻿using MSPC.Enums;
+﻿using MSCP.Interface;
+using MSPC.Data.Database;
+using MSPC.Enums;
 using MSPC.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Data;
 
 namespace MSPC.View
 {
     public class StaffMenuView
     {
-        public static void StaffMenuSwitch()
+        private IDataStaff MyDataGetter;
+        List<Staff> staffList;
+        public void StaffMenuSwitch()
         {
-            List<Staff> allStaff = new Staff().GetData();
+            MyDataGetter = new SqlData();
+            LoadData();
+
             bool isRunning = true;
 
             while (isRunning)
@@ -42,15 +48,6 @@ namespace MSPC.View
                         Console.Write("Enter staff phone: ");
                         string phone = Console.ReadLine();
 
-                        //Staff newStaff = new Staff
-                        //{
-                        //    Name = name,
-                        //    Position = (StaffPosition)Enum.Parse(typeof(StaffPosition), position),
-                        //    DateOfBirth = dateOfBirth,
-                        //    Email = email,
-                        //    Phone = phone
-                        //};
-
                         // Instance that uses constructor.
                         Staff newStaff = new Staff(name, (StaffPosition)Enum.Parse(typeof(StaffPosition), position), dateOfBirth, email, phone);
 
@@ -62,7 +59,7 @@ namespace MSPC.View
                     case '2':
                         Console.Clear();
                         Console.WriteLine("Staff list:");
-                        foreach (var staff in allStaff)
+                        foreach (var staff in staffList)
                         {
                             staff.DisplayInfo();
                         }
@@ -94,5 +91,12 @@ namespace MSPC.View
             Console.WriteLine("----------------");
             Console.Write("Select an option: ");
         }
+
+        public void LoadData()
+        {
+             staffList = MyDataGetter.GetData();
+        }
+
+
     }
 }

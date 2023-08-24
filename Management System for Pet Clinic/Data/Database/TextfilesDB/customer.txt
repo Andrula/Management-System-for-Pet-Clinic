@@ -1,4 +1,0 @@
-﻿
-0|nykunde||kundefon|kundemail
-0|nykunde||kundefon|kundemail
-1|kunde2||kundefon2|kundemail2

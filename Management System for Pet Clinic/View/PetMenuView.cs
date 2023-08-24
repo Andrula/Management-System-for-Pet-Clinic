@@ -9,7 +9,7 @@ namespace Management_System_for_Pet_Clinic.View
 {
     public class PetMenuView
     {
-        public static void PetMenuSwitch()
+        public void PetMenuSwitch()
         {
             Customer instance = new Customer();
 
