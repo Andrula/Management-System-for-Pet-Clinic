@@ -15,7 +15,7 @@ namespace MSPC.View
         List<Staff> staffList;
         public void StaffMenuSwitch()
         {
-            MyDataGetter = new SqlData();
+            MyDataGetter = new SqlDataStaff();
             LoadData();
 
             bool isRunning = true;

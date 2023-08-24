@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MSPC.Data.Database
 {
-    public class SqlData : IDataStaff
+    public class SqlDataStaff : IDataStaff
     {
         private string connectionString = "Data Source=INTXL25010160;Initial Catalog=MSPC;Integrated Security=True";
         public List<Staff> GetData()
