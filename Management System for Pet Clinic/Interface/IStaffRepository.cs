@@ -9,8 +9,11 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace MSCP.Interface
 {
-    public interface IDataStaff
+    public interface IStaffRepository
     {
-        List<Staff> GetData();
+        List<Staff> GetAll();
+        Staff GetById(int id);
+        void Add(Staff staff);
+        void Delete(int id);
     }
 }

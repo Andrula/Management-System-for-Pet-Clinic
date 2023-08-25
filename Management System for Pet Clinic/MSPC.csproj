@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Database\SqlData.cs" />
     <Compile Include="Data\Model\Appointment.cs" />
     <Compile Include="Data\Model\Customer.cs" />
     <Compile Include="Data\Model\Person.cs" />
@@ -53,7 +52,8 @@
     <Compile Include="Interface\IAppointment.cs" />
     <Compile Include="Interface\IDataCustomer.cs" />
     <Compile Include="Interface\IDataPet.cs" />
-    <Compile Include="Interface\IDataStaff.cs" />
+    <Compile Include="Interface\IStaffRepository.cs" />
+    <Compile Include="Repository\StaffRepository.cs" />
     <Compile Include="View\AppointmentMenuView.cs" />
     <Compile Include="View\CustomerMenuView.cs" />
     <Compile Include="View\PetMenuView.cs" />
@@ -64,6 +64,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Data\Database\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

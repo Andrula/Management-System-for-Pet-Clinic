@@ -11,11 +11,11 @@ namespace MSPC.View
 {
     public class StaffMenuView
     {
-        private IDataStaff MyDataGetter;
+        private IStaffRepository MyDataGetter;
         List<Staff> staffList;
         public void StaffMenuSwitch()
         {
-            MyDataGetter = new SqlDataStaff();
+            MyDataGetter = new StaffRepository();
             LoadData();
 
             bool isRunning = true;
@@ -66,6 +66,14 @@ namespace MSPC.View
                         Console.WriteLine("Press Q to go back.");
                         Console.ReadKey();
                         break;
+                    case '3':
+                        Console.Clear();
+                        Console.Write("Enter staff ID: ");
+                        int staffId = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    case '4':
+                        Console.Clear();
+                        break;
                     case 'q':
                     case 'Q':
                         // Go out of the loop and return to main menu
@@ -87,6 +95,8 @@ namespace MSPC.View
             Console.WriteLine("----- Menu -----");
             Console.WriteLine("1. Create a new staff");
             Console.WriteLine("2. Show list of staff");
+            Console.WriteLine("3. Find staff");
+            Console.WriteLine("4. Delete staff");
             Console.WriteLine("Q. Back");
             Console.WriteLine("----------------");
             Console.Write("Select an option: ");
@@ -94,9 +104,7 @@ namespace MSPC.View
 
         public void LoadData()
         {
-             staffList = MyDataGetter.GetData();
+             staffList = MyDataGetter.GetAll();
         }
-
-
     }
 }
