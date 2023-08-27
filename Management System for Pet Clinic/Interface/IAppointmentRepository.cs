@@ -5,10 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Management_System_for_Pet_Clinic.Interface
+namespace MSPC.Interface
 {
     public interface IAppointmentRepository
     {
-      
+        List<Appointment> GetAll();
+        Customer GetById(int id);
+        void Add(Appointment appointment);
+        void Delete(int id);
     }
 }

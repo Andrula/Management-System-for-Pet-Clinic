@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace MSCP.Interface
 {
-    public interface IDataPet
+    public interface IPetRepository
     {
-        List<Pet> GetData();
+        List<Pet> GetAll();
+        Pet GetById(int id);
+        void Add(Pet pet);
+        void Delete(int id);
     }
 }

@@ -1,0 +1,80 @@
+create Database MSPC
+
+use MSPC
+
+-- Create Staff table
+CREATE TABLE Staff (
+    id INT PRIMARY KEY IDENTITY (1,1),
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    address VARCHAR(255),
+    dob DATE,
+    positionID INT
+);
+
+-- Create Customer table
+CREATE TABLE Customer (
+    ID INT PRIMARY KEY IDENTITY (1,1),
+    name VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL
+);
+-- Create Pet table
+CREATE TABLE Pet (
+    ID INT PRIMARY KEY IDENTITY (1,1),
+    name VARCHAR(255) NOT NULL,
+    species VARCHAR(50) NOT NULL,
+    age INT,
+    ownerID INT,
+	FOREIGN KEY (ownerID) REFERENCES Customer (ID)
+);
+
+
+-- Create Appointment table
+CREATE TABLE Appointment (
+    id INT PRIMARY KEY IDENTITY (1,1),
+    dateAndTime DATETIME NOT NULL,
+    durationInMinutes INT NOT NULL,
+    responsibleStaffID INT,
+    purpose VARCHAR(255),
+    status VARCHAR(50),
+    note VARCHAR(1000),
+    petID INT,
+	customerID int,
+	FOREIGN KEY (petID) REFERENCES Pet (ID),
+	FOREIGN KEY (customerID) REFERENCES Customer(ID)
+);
+
+-- Insert sample data into Staff table
+INSERT INTO Staff (name, email, phone, address, dob, positionID)
+VALUES
+    ('Mads Andersen', 'mads@example.com', '123-456-7890', 'Hovedgade 10', '1985-02-18', 1),
+    ('Sofie Nielsen', 'sofie@example.com', '987-654-3210', 'Skovvej 5', '1990-07-15', 2),
+    ('Lars Jørgensen', 'lars@example.com', '555-123-4567', 'Bakkevej 3', '1978-11-30', 3);
+
+-- Insert sample data into Customer table
+INSERT INTO Customer (name, phone, email)
+VALUES
+    ('Emma P', '111-222-3333', 'emma@example.com'),
+    ('Oliver Møller', '444-555-6666', 'oliver@example.com');
+
+-- Insert sample data into Pet table
+INSERT INTO Pet (name, species, age, ownerID)
+VALUES
+    ('Misser', 'Kat', 4, 1),
+    ('Balder', 'Hund', 6, 1),
+    ('Sofus', 'Kat', 3, 2),
+    ('Bella', 'Hund', 5, 2),
+    ('Molly', 'Kat', 2, 2),
+    ('Charlie', 'Hund', 7, 1);
+
+-- Insert sample data into Appointment table
+INSERT INTO Appointment (dateAndTime, durationInMinutes, responsibleStaffID, purpose, status, note, petID, customerID)
+VALUES
+    ('2023-08-25 14:00:00', 60, 1, 'Sundhedstjek', 'Planlagt', 'Husk vaccinationskort', 1, 1),
+    ('2023-08-28 10:30:00', 45, 2, 'Trimning', 'Planlagt', 'Klipp negle og trim pelsen', 3, 2),
+    ('2023-08-30 09:00:00', 30, 3, 'Vaccination', 'Planlagt', 'Årlig vaccination', 2, 1),
+    ('2023-09-02 15:30:00', 60, 1, 'Sundhedstjek', 'Planlagt', 'Tjek helbredet', 4, 2),
+    ('2023-09-05 12:00:00', 45, 2, 'Trimning', 'Planlagt', 'Komplet trimning', 5, 2),
+    ('2023-09-08 11:00:00', 30, 3, 'Vaccination', 'Planlagt', 'Opdatering af vaccination', 6, 1);

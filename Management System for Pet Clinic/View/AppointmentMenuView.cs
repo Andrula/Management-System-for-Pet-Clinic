@@ -1,7 +1,9 @@
 ﻿using MSCP.Interface;
 using MSPC.Data.Database;
 using MSPC.Enums;
+using MSPC.Interface;
 using MSPC.Model;
+using MSPC.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +14,12 @@ namespace MSPC.View
 {
     public class AppointmentMenuView
     {
-        private IDataStaff MyDataGetter;
-        List<Staff> staffList;
+        private IAppointmentRepository MyDataGetter;
+        List<Appointment> appointmentList;
+
         public void AppointmentMenuSwitch()
         {
-            MyDataGetter = new SqlData();
+            MyDataGetter = new AppointmentRepository();
 
             bool isRunning = true;
             while (isRunning)
@@ -29,40 +32,15 @@ namespace MSPC.View
                 {
                     case '1':
                         Console.WriteLine("Appointment list.");
-                        PrintAllAppointments(Appointment.GetAllAppointments());
                         Console.ReadKey();
                         break;
                     case '2':
                         Console.Clear();
-                        CreateAppointment();
+
                         break;
                     case '3':
-                        Console.Write("Enter appointment ID: ");
-                        if (int.TryParse(Console.ReadLine(), out int appointmentId))
-                        {
-                            Appointment existingAppointment = Appointment.FindAppointmentByID(Appointment.GetAllAppointments(), appointmentId);
+                        Console.Clear();
 
-                            if (existingAppointment != null)
-                            {
-                                Console.Write("Enter new date: ");
-                                DateTime newDate = DateTime.Parse(Console.ReadLine());
-
-                                // Call the Reschedule method or update the DateAndTime property
-                                existingAppointment.Reschedule(newDate); // Assuming Reschedule method exists
-
-                                Console.WriteLine("Appointment rescheduled successfully.");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Appointment not found.");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid input. Please enter a valid appointment ID.");
-                        }
-
-                        Console.ReadKey();
 
                         break;
                     case 'q':
@@ -94,73 +72,7 @@ namespace MSPC.View
 
         public void LoadData()
         {
-            staffList = MyDataGetter.GetData();
-        }
-
-        public void CreateAppointment()
-        {
-            try
-            {
-                Console.Write("Enter date and time (YYYY-MM-DD HH:mm): ");
-                DateTime dateAndTime = DateTime.Parse(Console.ReadLine());
-
-                Console.Write("Enter duration in minutes: ");
-                int duration = int.Parse(Console.ReadLine());
-
-                Console.Write("Enter patient name: ");
-                string patientName = Console.ReadLine();
-
-                Console.Write("Enter responsible staff name: ");
-                string staffName = Console.ReadLine();
-
-                // Create an instance of the Staff class
-                Staff staffInstance = new Staff();
-
-                Staff staff = Staff.FindStaffByName(staffList, staffName);
-
-                Pet petInstance = new Pet();
-
-                List<Pet> allPet = petInstance.GetData();
-
-                Pet pet = Pet.FindPetByName(allPet, patientName);
-
-                if (staff == null)
-                {
-                    Console.WriteLine("Staff not found.");
-                    return;
-                }
-
-                if (pet == null)
-                {
-                    Console.WriteLine("Pet not found");
-                    return;
-                }
-
-                Console.Write("Enter purpose: ");
-                string purpose = Console.ReadLine();
-
-                Appointment newAppointment = new Appointment();
-                newAppointment.Schedule(dateAndTime, duration, pet, staff, purpose);
-
-                Appointment.AddAppointment(newAppointment);
-
-                Console.WriteLine("Appointment created successfully.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Failed to create appointment. Reason: {ex.Message}");
-            }
-
-            Console.ReadKey();
-        }
-
-        static void PrintAllAppointments(List<Appointment> appointmentList)
-        {
-            foreach (var appointment in appointmentList)
-            {
-                appointment.PrintAppointmentDetails();
-            }
-            Console.ReadLine();
+            appointmentList = MyDataGetter.GetAll();
         }
 
     }

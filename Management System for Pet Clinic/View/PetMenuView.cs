@@ -1,19 +1,25 @@
-﻿using MSPC.Model;
+﻿using MSCP.Interface;
+using MSPC.Data.Database;
+using MSPC.Model;
+using MSPC.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Management_System_for_Pet_Clinic.View
+namespace MSPC.View
 {
     public class PetMenuView
     {
+        private IPetRepository MyDataGetter;
+        List<Pet> petList;
+
         public void PetMenuSwitch()
         {
-            Customer instance = new Customer();
-
-            List<Customer> list = instance.GetData();
+            PetRepository petRepositoryInstance = new PetRepository();
+            MyDataGetter = new PetRepository();
+            LoadData();
 
             bool isRunning = true;
 
@@ -38,16 +44,16 @@ namespace Management_System_for_Pet_Clinic.View
                         int petAge = int.Parse(Console.ReadLine());
 
                         Console.Write("Enter owner's : ");
-                        string ownerName = Console.ReadLine();
+                        int ownerID = Convert.ToInt32(Console.ReadLine());
 
-                        Customer owner = Customer.FindCustomerByName(list, ownerName);
+                        CustomerRepository crInstance = new CustomerRepository();
+                        Customer owner = crInstance.GetById(ownerID);
 
                         if (owner != null)
                         {
                             Pet pet = new Pet(petName,petSpecies, petAge, owner);
-                            owner.AddPet(pet);
 
-                            pet.AddPetAndSave(pet);
+                            petRepositoryInstance.Add(pet);
 
                             Console.WriteLine("New pet created and added to the owner's list.");
                         }
@@ -62,9 +68,8 @@ namespace Management_System_for_Pet_Clinic.View
                         break;
                     case '2':
                         Console.Clear();
-                        List<Pet> allPets = new Pet().GetData();
-
-                        foreach (var pet in allPets)
+                        Console.WriteLine("Pet list: ");
+                        foreach (var pet in petList)
                         {
                             pet.DisplayInfo();
                         }
@@ -74,8 +79,8 @@ namespace Management_System_for_Pet_Clinic.View
                         Console.Write("Enter pet ID: ");
                         if (int.TryParse(Console.ReadLine(), out int petID))
                         {
-                            List<Pet> petInstance = new Pet().GetData();
-                            Pet foundPet = Pet.FindPetByID(petInstance, petID);
+      
+                            Pet foundPet = petRepositoryInstance.GetById(petID);
                             if (foundPet != null)
                             {
                                 Console.Clear();
@@ -116,6 +121,11 @@ namespace Management_System_for_Pet_Clinic.View
             Console.WriteLine("Q. Back");
             Console.WriteLine("----------------");
             Console.Write("Select an option: ");
+        }
+
+        public void LoadData()
+        {
+            petList = MyDataGetter.GetAll();
         }
     }
 }

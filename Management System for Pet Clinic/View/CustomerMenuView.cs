@@ -1,5 +1,8 @@
-﻿using MSPC.Enums;
+﻿using MSCP.Interface;
+using MSPC.Data.Database;
+using MSPC.Enums;
 using MSPC.Model;
+using MSPC.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +15,16 @@ namespace Management_System_for_Pet_Clinic.View
 {
     public class CustomerMenuView
     {
+
+        private ICustomerRepository MyDataGetter;
+        List<Customer> customerList;
+
         public void CustomerMenuSwitch()
         {
-            Customer instance = new Customer();
-
-            List<Customer> list = instance.GetData();
+            MyDataGetter = new CustomerRepository();
+            LoadData();
+            
+            CustomerRepository customerInstance = new CustomerRepository();
 
             bool isRunning = true;
 
@@ -28,7 +36,6 @@ namespace Management_System_for_Pet_Clinic.View
                 switch (selection)
                 {
                     case '1':
-
                         Console.Clear();
                         Console.WriteLine("Creating a new Customer:");
                         Console.Write("Enter customer name: ");
@@ -45,7 +52,8 @@ namespace Management_System_for_Pet_Clinic.View
 
                         Customer newCustomer = new Customer(name, email, phone);
 
-                        newCustomer.AddCustomerAndSave(newCustomer);
+                        customerInstance.Add(newCustomer);
+                        LoadData();
 
                         Console.WriteLine("New customer member created successfully.");
                         Console.ReadKey();
@@ -55,7 +63,7 @@ namespace Management_System_for_Pet_Clinic.View
                         Console.Clear();
                         Console.WriteLine("Customer list.");
 
-                        foreach (var customer in list)
+                        foreach (var customer in customerList)
                         {
                             customer.DisplayInfo();
                         }
@@ -63,32 +71,30 @@ namespace Management_System_for_Pet_Clinic.View
                         Console.ReadKey();
                         break;
                     case '3':
+                        Console.Clear();
                         Console.Write("Enter customer ID: ");
-                        if (int.TryParse(Console.ReadLine(), out int customerId))
+                        int findCustomerId = Convert.ToInt32(Console.ReadLine());
+                        Customer foundCustomer = customerInstance.GetById(findCustomerId);
+
+                        if (foundCustomer != null)
                         {
-                            Customer foundCustomer = Customer.FindCustomerById(list, customerId);
-                            if (foundCustomer != null)
-                            {
-                                Console.Clear();
-                                Console.WriteLine("Found customer:");
-                                foundCustomer.DisplayInfo();
-                            }
-                            else
-                            {
-                                Console.WriteLine("Customer not found.");
-                            }
+                            Console.Clear();
+                            Console.WriteLine("Found customer:");
+                            foundCustomer.DisplayInfo();
                         }
                         else
                         {
-                            Console.WriteLine("Invalid input. Please enter a valid customer ID.");
+                            Console.WriteLine("Customer not found.");
                         }
+
                         Console.ReadKey();
                         break;
                     case '4':
-                        Console.Write("Enter owner's name: ");
-                        string ownerName = Console.ReadLine();
+                        Console.Write("Enter customer ID: ");
+                        int customerID = Convert.ToInt32(Console.ReadLine());
 
-                        Customer owner = Customer.FindCustomerByName(list, ownerName);
+                        CustomerRepository repositoryInstance = new CustomerRepository(); 
+                        Customer owner = repositoryInstance.GetById(customerID);
 
                         if (owner != null)
                         {
@@ -102,9 +108,18 @@ namespace Management_System_for_Pet_Clinic.View
                         {
                             Console.WriteLine("Owner not found.");
                         }
-
                         Console.ReadKey();
                         break;
+                    case '5':
+                        Console.Clear();
+                        Console.Write("Enter customer ID: ");
+                        int deleteCustomer = Convert.ToInt32(Console.ReadLine());
+                        customerInstance.Delete(deleteCustomer);
+                        LoadData();
+                        Console.WriteLine("Customer succesfully deleted.");
+                        Console.ReadKey();
+                        break;
+
                     case 'q':
                     case 'Q':
                         // Go out of the loop and return to main menu
@@ -125,9 +140,15 @@ namespace Management_System_for_Pet_Clinic.View
             Console.WriteLine("2. List all customers");
             Console.WriteLine("3. Find customer by ID");
             Console.WriteLine("4. List pets belonging to a specific customer");
+            Console.WriteLine("5. Delete customer");
             Console.WriteLine("Q. Back");
             Console.WriteLine("----------------");
             Console.Write("Select an option: "); 
+        }
+
+        public void LoadData()
+        {
+            customerList = MyDataGetter.GetAll();
         }
     }
 }

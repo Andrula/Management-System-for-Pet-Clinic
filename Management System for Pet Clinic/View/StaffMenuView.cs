@@ -13,6 +13,7 @@ namespace MSPC.View
     {
         private IStaffRepository MyDataGetter;
         List<Staff> staffList;
+
         public void StaffMenuSwitch()
         {
             MyDataGetter = new StaffRepository();
@@ -48,10 +49,16 @@ namespace MSPC.View
                         Console.Write("Enter staff phone: ");
                         string phone = Console.ReadLine();
 
-                        // Instance that uses constructor.
-                        Staff newStaff = new Staff(name, (StaffPosition)Enum.Parse(typeof(StaffPosition), position), dateOfBirth, email, phone);
+                        Console.Write("Enter staff address: ");
+                        string address = Console.ReadLine();
 
-                        newStaff.AddStaffAndSave(newStaff);
+
+                        // Instance that uses constructor.
+                        Staff newStaff = new Staff(name, (StaffPosition)Enum.Parse(typeof(StaffPosition), position), dateOfBirth, address, email, phone);
+
+                        StaffRepository staffRepository = new StaffRepository();
+                        staffRepository.Add(newStaff);
+                        LoadData();
 
                         Console.WriteLine("New staff member created successfully.");
                         Console.ReadKey();
@@ -69,10 +76,28 @@ namespace MSPC.View
                     case '3':
                         Console.Clear();
                         Console.Write("Enter staff ID: ");
-                        int staffId = Convert.ToInt32(Console.ReadLine());
+                        int findStaffId = Convert.ToInt32(Console.ReadLine());
+                        StaffRepository findStaffInstance = new StaffRepository();
+                        Staff foundStaff = findStaffInstance.GetById(findStaffId);
+                        if (foundStaff != null)
+                        {
+                            foundStaff.DisplayInfo();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Staff with the specified ID was not found.");
+                        }
+                        Console.ReadKey();
                         break;
                     case '4':
                         Console.Clear();
+                        Console.Write("Enter staff ID: ");
+                        int deleteStaffId = Convert.ToInt32(Console.ReadLine());
+                        StaffRepository deleteStaffInstance = new StaffRepository();
+                        deleteStaffInstance.Delete(deleteStaffId);
+                        LoadData();
+                        Console.WriteLine("Staff succesfully deleted.");
+                        Console.ReadKey();
                         break;
                     case 'q':
                     case 'Q':

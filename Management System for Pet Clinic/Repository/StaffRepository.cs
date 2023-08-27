@@ -14,7 +14,10 @@ namespace MSPC.Data.Database
 {
     public class StaffRepository : IStaffRepository
     {
-        private string connectionString = "Data Source=INTXL25010160;Initial Catalog=MSPC;Integrated Security=True";
+        // Work PC
+        //private string connectionString = "Data Source=INTXL25010160;Initial Catalog=MSPC;Integrated Security=True";
+        // Home PC
+        private string connectionString = "Data Source=DESKTOP-UIHP6HL\\SQLEXPRESS;Initial Catalog=MSPC;Integrated Security=True ";
         public List<Staff> GetAll()
         {
 

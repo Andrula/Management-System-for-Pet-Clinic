@@ -49,10 +49,13 @@
     <Compile Include="Data\Model\Pet.cs" />
     <Compile Include="Data\Model\Staff.cs" />
     <Compile Include="Enums\StaffPosition.cs" />
-    <Compile Include="Interface\IAppointment.cs" />
-    <Compile Include="Interface\IDataCustomer.cs" />
-    <Compile Include="Interface\IDataPet.cs" />
+    <Compile Include="Interface\IAppointmentRepository.cs" />
+    <Compile Include="Interface\ICustomerRepository.cs" />
+    <Compile Include="Interface\IPetRepository.cs" />
     <Compile Include="Interface\IStaffRepository.cs" />
+    <Compile Include="Repository\AppointmentRepository.cs" />
+    <Compile Include="Repository\CustomerRepository.cs" />
+    <Compile Include="Repository\PetRepository.cs" />
     <Compile Include="Repository\StaffRepository.cs" />
     <Compile Include="View\AppointmentMenuView.cs" />
     <Compile Include="View\CustomerMenuView.cs" />
@@ -66,6 +69,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Database\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DatabaseCreation.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
