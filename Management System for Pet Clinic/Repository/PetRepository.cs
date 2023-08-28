@@ -13,9 +13,9 @@ namespace MSPC.Repository
     public class PetRepository : IPetRepository
     {
         // Work PC
-        //private string connectionString = "Data Source=INTXL25010160;Initial Catalog=MSPC;Integrated Security=True";
+        private string connectionString = "Data Source=INTXL25010160;Initial Catalog=MSPC;Integrated Security=True";
         // Home PC
-        private string connectionString = "Data Source=DESKTOP-UIHP6HL\\SQLEXPRESS;Initial Catalog=MSPC;Integrated Security=True ";
+        //private string connectionString = "Data Source=DESKTOP-UIHP6HL\\SQLEXPRESS;Initial Catalog=MSPC;Integrated Security=True ";
 
         public List<Pet> GetAll()
         {
@@ -25,7 +25,7 @@ namespace MSPC.Repository
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("SELECT id, name, age, species, ownerID FROM Pet", connection))
+                using (SqlCommand command = new SqlCommand("SELECT id, name, species, age, ownerID FROM Pet", connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -33,12 +33,13 @@ namespace MSPC.Repository
                         {
                             int id = reader.GetInt32(0);
                             string name = reader.GetString(1);
-                            int age = reader.GetInt32(2);
-                            string species = reader.GetString(3);
-                            int ownerID = reader.GetInt32(4);
+                            string species = reader.GetString(2);
+
+                            int age = reader.GetInt32(3);
+                            int customerID = reader.IsDBNull(4) ? 0 : reader.GetInt32(4);
 
                             CustomerRepository customerRepository = new CustomerRepository();
-                            Customer owner = customerRepository.GetById(ownerID);
+                            Customer owner = customerRepository.GetById(customerID);
 
                             petData.Add(new Pet { ID = id, Name = name, Age = age, Species = species, Owner = owner });
                         }
@@ -54,12 +55,12 @@ namespace MSPC.Repository
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("INSERT INTO Pet (name, species, age, ownerID) VALUES (@Name, @Species, @Age, @OwnerID); SELECT SCOPE_IDENTITY()", connection))
+                using (SqlCommand command = new SqlCommand("INSERT INTO Pet (name, species, age, ownerID) VALUES (@Name, @Species, @Age, @ownerID); SELECT SCOPE_IDENTITY()", connection))
                 {
                     command.Parameters.AddWithValue("@Name", pet.Name);
                     command.Parameters.AddWithValue("@Species", pet.Species);
                     command.Parameters.AddWithValue("@Age", pet.Age);
-                    command.Parameters.AddWithValue("@OwnerID", pet.Owner.ID);
+                    command.Parameters.AddWithValue("@ownerID", pet.Owner.ID);
 
                     int newPetID = Convert.ToInt32(command.ExecuteScalar());
 
@@ -112,6 +113,35 @@ namespace MSPC.Repository
                 }
             }
             return null;
+        }
+        public List<Pet> GetPetsByOwnerId(int ownerId)
+        {
+            List<Pet> petData = new List<Pet>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT id, name, species, age FROM Pet WHERE ownerID = @OwnerId", connection))
+                {
+                    command.Parameters.AddWithValue("@OwnerId", ownerId);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int id = reader.GetInt32(0);
+                            string name = reader.GetString(1);
+                            string species = reader.GetString(2);
+                            int age = reader.GetInt32(3);
+
+                            petData.Add(new Pet { ID = id, Name = name, Species = species, Age = age });
+                        }
+                    }
+                }
+            }
+
+            return petData;
         }
     }
 }

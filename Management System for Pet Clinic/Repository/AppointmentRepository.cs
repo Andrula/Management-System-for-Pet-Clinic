@@ -10,6 +10,11 @@ namespace MSPC.Repository
 {
     public class AppointmentRepository : IAppointmentRepository
     {
+        // Work PC
+        private string connectionString = "Data Source=INTXL25010160;Initial Catalog=MSPC;Integrated Security=True";
+        // Home PC
+        //private string connectionString = "Data Source=DESKTOP-UIHP6HL\\SQLEXPRESS;Initial Catalog=MSPC;Integrated Security=True ";
+
         public void Add(Appointment appointment)
         {
             throw new NotImplementedException();

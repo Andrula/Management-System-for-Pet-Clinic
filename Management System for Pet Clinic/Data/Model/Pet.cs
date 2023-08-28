@@ -39,9 +39,10 @@ namespace MSPC.Model
 
         #region Methods
 
-        public void DisplayInfo()
+        public string DisplayInfo()
         {
-            Console.WriteLine($"Pet ID: {ID} Pet name: {Name} Age: {Age}");
+            string ekss = $"Pet ID: {ID} Pet name: {Name} Age: {Age}";
+            return ekss;
         }
 
         #endregion

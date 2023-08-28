@@ -54,7 +54,7 @@ namespace MSPC.View
                             Pet pet = new Pet(petName,petSpecies, petAge, owner);
 
                             petRepositoryInstance.Add(pet);
-
+                            LoadData();
                             Console.WriteLine("New pet created and added to the owner's list.");
                         }
                         else

@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace Management_System_for_Pet_Clinic.View
+namespace MSPC.View
 {
     public class CustomerMenuView
     {
@@ -25,6 +25,7 @@ namespace Management_System_for_Pet_Clinic.View
             LoadData();
             
             CustomerRepository customerInstance = new CustomerRepository();
+            PetRepository petRepositoryInstance = new PetRepository();
 
             bool isRunning = true;
 
@@ -93,13 +94,16 @@ namespace Management_System_for_Pet_Clinic.View
                         Console.Write("Enter customer ID: ");
                         int customerID = Convert.ToInt32(Console.ReadLine());
 
-                        CustomerRepository repositoryInstance = new CustomerRepository(); 
-                        Customer owner = repositoryInstance.GetById(customerID);
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer owner = customerRepository.GetById(customerID);
 
                         if (owner != null)
                         {
                             Console.WriteLine($"Pets of {owner.Name}:");
-                            foreach (var pet in owner.Pets)
+
+                            List<Pet> pets = petRepositoryInstance.GetPetsByOwnerId(owner.ID);
+
+                            foreach (var pet in pets)
                             {
                                 pet.DisplayInfo();
                             }

@@ -11,7 +11,6 @@ namespace MSCP.Interface
     {
         List<Customer> GetAll();
         Customer GetById(int id);
-        Customer GetByIdWithPets(int id);
         void Add(Customer customer);
         void Delete(int id);
     }
