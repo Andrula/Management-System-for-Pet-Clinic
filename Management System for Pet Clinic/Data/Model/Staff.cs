@@ -12,28 +12,9 @@ namespace MSPC.Model
 {
     public class Staff : Person
     {
-        // Static list
-        private static List<Staff> staffList = new List<Staff>();
-
-        #region Fields
-        private DateTime _dateOfBirth;
-        #endregion
-
         #region Properties
         public StaffPosition Position { get; set; }
-
-        public DateTime DateOfBirth
-        {
-            get { return _dateOfBirth; }
-            set
-            {
-                if (value.Year <= 1900)
-                {
-                    throw new Exception("Date out of range");
-                }
-                _dateOfBirth = value;
-            }
-        }
+        public DateTime DateOfBirth { get; set; }
         #endregion
 
         #region Constructor(s)

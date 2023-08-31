@@ -21,6 +21,8 @@ namespace MSPC.Model
             Name = name;
             Phone = phone;
             Email = email;
+
+            Pets = new List<Pet>();
         }
 
         public Customer()

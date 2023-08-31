@@ -67,9 +67,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\Database\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="DatabaseCreation.txt" />
   </ItemGroup>

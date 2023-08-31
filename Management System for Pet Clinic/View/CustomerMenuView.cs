@@ -6,6 +6,7 @@ using MSPC.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -117,11 +118,45 @@ namespace MSPC.View
                     case '5':
                         Console.Clear();
                         Console.Write("Enter customer ID: ");
-                        int deleteCustomer = Convert.ToInt32(Console.ReadLine());
-                        customerInstance.Delete(deleteCustomer);
-                        LoadData();
-                        Console.WriteLine("Customer succesfully deleted.");
-                        Console.ReadKey();
+                        if (int.TryParse(Console.ReadLine(), out int deleteCustomer))
+                        {
+                            Customer customerResult = customerInstance.GetById(deleteCustomer);
+                            if (customerResult != null)
+                            {
+                                Console.WriteLine("Are you sure you want do delete the following customer?:");
+                                Console.WriteLine($"ID: {customerResult.ID} Name: {customerResult.Name} Email: {customerResult.Email}");
+                                Console.WriteLine("Press (Y)es or (N)o");
+
+                                char charResult = Console.ReadKey().KeyChar;
+                                if (charResult == 'y')
+                                {
+                                    customerInstance.Delete(deleteCustomer);
+                                    LoadData();
+
+                                    Console.WriteLine("Customer succesfully deleted.");
+                                    Console.ReadKey();
+                                }
+                                else if (charResult == 'n')
+                                {
+                                    DisplayMenu();
+                                    break;
+                                }
+                                 else
+                                {
+                                    Console.WriteLine("Invalid response.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Staff not found");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid staff ID.");
+                        }
+                        Console.Write("Press enter to return: ");
+                        Console.ReadLine();
                         break;
 
                     case 'q':

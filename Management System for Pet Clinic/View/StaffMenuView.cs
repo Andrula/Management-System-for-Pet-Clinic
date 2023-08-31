@@ -19,6 +19,8 @@ namespace MSPC.View
             MyDataGetter = new StaffRepository();
             LoadData();
 
+            StaffRepository staffInstance = new StaffRepository();
+
             bool isRunning = true;
 
             while (isRunning)
@@ -52,8 +54,6 @@ namespace MSPC.View
                         Console.Write("Enter staff address: ");
                         string address = Console.ReadLine();
 
-
-                        // Instance that uses constructor.
                         Staff newStaff = new Staff(name, (StaffPosition)Enum.Parse(typeof(StaffPosition), position), dateOfBirth, address, email, phone);
 
                         StaffRepository staffRepository = new StaffRepository();
@@ -92,12 +92,46 @@ namespace MSPC.View
                     case '4':
                         Console.Clear();
                         Console.Write("Enter staff ID: ");
-                        int deleteStaffId = Convert.ToInt32(Console.ReadLine());
-                        StaffRepository deleteStaffInstance = new StaffRepository();
-                        deleteStaffInstance.Delete(deleteStaffId);
-                        LoadData();
-                        Console.WriteLine("Staff succesfully deleted.");
-                        Console.ReadKey();
+                        if (int.TryParse(Console.ReadLine(), out int deleteStaffId))
+                        {
+                            Staff staffResult = staffInstance.GetById(deleteStaffId);
+                            if (staffResult != null)
+                            {
+                                Console.WriteLine("Are you sure you want to delete the following staff?");
+                                Console.WriteLine($"ID: {staffResult.ID} Name: {staffResult.Name} Email: {staffResult.Email}");
+                                Console.WriteLine("Press (Y)es or (N)o ");
+
+                                char response = Char.ToLower(Console.ReadKey().KeyChar);
+                                Console.WriteLine(); // Move to a new line after reading the response.
+
+                                if (response == 'y')
+                                {
+                                    staffInstance.Delete(deleteStaffId);
+                                    LoadData();
+                                    Console.WriteLine("Staff successfully deleted.");
+                                }
+                                else if (response == 'n')
+                                {
+                                    DisplayStaffMenu();
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid response.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Staff not found");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid staff ID.");
+                        }
+                        Console.Write("Press enter to return: ");
+                        Console.ReadLine();
+
                         break;
                     case 'q':
                     case 'Q':
